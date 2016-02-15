@@ -98,7 +98,7 @@ add_library(gctd2d
 	gctd2d/sprite.cpp
 	gctd2d/sprite.h
 	gctd2d/renderer.cpp
-	gctd2d/rendere.h
+	gctd2d/renderer.h
 )
 
 # Copy shaders to the build directory
