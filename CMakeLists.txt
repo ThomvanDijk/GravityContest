@@ -60,7 +60,7 @@ include_directories(
 	${CMAKE_SOURCE_DIR}/external/glfw-3.0.3/include/GLFW/
 	${CMAKE_SOURCE_DIR}/external/glm-0.9.7.0/
 	${CMAKE_SOURCE_DIR}/external/glew-1.9.0/include/
-	${CMAKE_SOURCE_DIR}/gctd2d/
+	${CMAKE_SOURCE_DIR}/common/
 	${CMAKE_SOURCE_DIR}/.
 )
 
@@ -68,12 +68,12 @@ link_directories(
 	${CMAKE_SOURCE_DIR}/external/glfw-3.0.3/src/
 	${CMAKE_SOURCE_DIR}/external/glew-1.9.0/
 	${CMAKE_SOURCE_DIR}/external/
-	${CMAKE_SOURCE_DIR}/gctd2d
+	${CMAKE_SOURCE_DIR}/common
 )
 
 set(ALL_LIBS
 	${OPENGL_LIBRARY}
-	gctd2d
+	common
 	GLFW_303
 	GLEW_190
 )
@@ -87,46 +87,46 @@ add_definitions(
 )
 
 
-# libgctd2d.a
-add_library(gctd2d
-	gctd2d/shader.cpp
-	gctd2d/shader.h
-	gctd2d/camera.cpp
-	gctd2d/camera.h
-	gctd2d/texture.cpp
-	gctd2d/texture.h
-	gctd2d/sprite.cpp
-	gctd2d/sprite.h
-	gctd2d/renderer.cpp
-	gctd2d/renderer.h
+# libcommon.a
+add_library(common
+	common/shader.cpp
+	common/shader.h
+	common/camera.cpp
+	common/camera.h
+	common/texture.cpp
+	common/texture.h
+	common/sprite.cpp
+	common/sprite.h
+	common/renderer.cpp
+	common/renderer.h
 )
 
 # Copy shaders to the build directory
 file(
-	COPY ${CMAKE_SOURCE_DIR}/gctd2d/shaders
+	COPY ${CMAKE_SOURCE_DIR}/common/shaders
 	DESTINATION ${CMAKE_BINARY_DIR}
 )
 
 
-# demo
-add_executable(demo
-	demo/demo.cpp
+# game
+add_executable(game
+	game/demo.cpp
 )
-target_link_libraries(demo
+target_link_libraries(game
 	${ALL_LIBS}
 )
 
 # Copy assets to the build directory
 file(
-	COPY demo/assets
+	COPY game/assets
 	DESTINATION ${CMAKE_BINARY_DIR}
 )
 
 
 if (NOT ${CMAKE_GENERATOR} MATCHES "Xcode" )
 #add_custom_command(
-#   TARGET demo POST_BUILD
-#   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo/"
+#   TARGET game POST_BUILD
+#   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/game${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/game/"
 #)
 elseif (${CMAKE_GENERATOR} MATCHES "Xcode" )
 
