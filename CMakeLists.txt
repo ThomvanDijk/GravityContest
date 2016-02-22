@@ -118,7 +118,7 @@ target_link_libraries(game
 
 # Copy assets to the build directory
 file(
-	COPY game/assets
+	COPY ${CMAKE_SOURCE_DIR}/game/assets
 	DESTINATION ${CMAKE_BINARY_DIR}
 )
 

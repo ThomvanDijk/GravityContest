@@ -17,12 +17,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/euler_angles.hpp>
 
-#include <common/sprite.h>
 #include <common/shader.h>
+#include <common/sprite.h>
 #include <common/texture.h>
 #include <common/camera.h>
 
-class Renderer 
+class Renderer
 {
 	public:
 		Renderer();
@@ -33,7 +33,7 @@ class Renderer
 
 	private:
 		int init();
-
+		
 		GLFWwindow* _window;
 		int window_width;
 		int window_height;
