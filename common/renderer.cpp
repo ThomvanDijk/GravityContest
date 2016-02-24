@@ -50,7 +50,7 @@ int Renderer::init()
     glfwSetInputMode(_window, GLFW_STICKY_KEYS, GL_TRUE);
 
     // Dark blue background
-    glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+    glClearColor(0.5f, 0.0f, 0.4f, 0.0f);
 
     // Enable depth test
     //glEnable(GL_DEPTH_TEST);
@@ -93,7 +93,7 @@ void Renderer::renderSprite(Sprite* sprite)
 	glUseProgram(programID);
 
 	// Build the Model matrix
-	glm::mat4 translationMatrix	= glm::translate(glm::mat4(1.0f), glm::vec3(500.0f, 300.0f, 0.0f));
+	glm::mat4 translationMatrix	= glm::translate(glm::mat4(1.0f), glm::vec3(300.0f, 300.0f, 0.0f));
 	glm::mat4 rotationMatrix	= glm::eulerAngleYXZ(0.0f, 0.0f, 0.0f);
 	glm::mat4 scalingMatrix		= glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
