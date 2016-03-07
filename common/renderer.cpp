@@ -78,6 +78,12 @@ int Renderer::init()
     return 0;
 }
 
+void Renderer::renderScene(Scene* scene)
+{
+	// Clear the screen
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
 void Renderer::renderSprite(Sprite* sprite)
 {
 	// Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)

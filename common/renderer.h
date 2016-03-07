@@ -21,6 +21,7 @@
 #include <common/sprite.h>
 #include <common/texture.h>
 #include <common/camera.h>
+#include <common/scene.h>
 
 class Renderer
 {
@@ -28,6 +29,7 @@ class Renderer
 		Renderer();
 		virtual ~Renderer();
 
+		void renderScene(Scene* scene);
 		void renderSprite(Sprite* sprite);
 		GLFWwindow* window() { return _window; };
 

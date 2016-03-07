@@ -98,6 +98,8 @@ add_library(common
 	common/core.h
 	common/scene.cpp
 	common/scene.h
+	common/entity.cpp
+	common/entity.h
 )
 
 # Copy shaders to the build directory
