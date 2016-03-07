@@ -12,12 +12,14 @@
 #include <common/renderer.h>
 #include <common/sprite.h>
 
-int main( void )
+int main(void)
 {
 	Renderer renderer;
 	Sprite* sprite = new Sprite();
 
-	do {
+	// Do this until the ESC key is pressed or the window is closed
+	while (glfwGetKey(renderer.window(), GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(renderer.window()) == 0)
+	{
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -26,10 +28,7 @@ int main( void )
 		// Swap buffers
 		glfwSwapBuffers(renderer.window());
 		glfwPollEvents();
-
-	} // Check if the ESC key was pressed or the window was closed
-	while( glfwGetKey(renderer.window(), GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
-		   glfwWindowShouldClose(renderer.window()) == 0 );
+	} 
 
 	delete sprite;
 

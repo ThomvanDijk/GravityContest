@@ -2,7 +2,6 @@
 cmake_minimum_required (VERSION 2.6)
 project (gravity_fighters)
 
-
 if( CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR )
     message( FATAL_ERROR "Please select another Build Directory ! (and give it a clever name, like 'build')" )
 endif()
@@ -12,7 +11,6 @@ endif()
 if( CMAKE_BINARY_DIR MATCHES " " )
 	message( "Your Build Directory contains spaces. If you experience problems when compiling, this can be the cause." )
 endif()
-
 
 if(UNIX)
 	#set(CMAKE_CXX_FLAGS "-Wall -std=c++0x -pedantic -O2 -g -pg")
@@ -26,7 +24,6 @@ if(UNIX)
 	#set(CMAKE_CXX_FLAGS "-Wall -pg -std=c++11")
 endif(UNIX)
 
-
 if(WIN32)
 	# On Visual 2005 and above, this module can set the debug working directory
 	list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/external/rpavlik-cmake-modules-1c73e35")
@@ -39,7 +36,6 @@ if(WIN32)
 		add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4514 /nologo" ) # suppress pedantic warnings
 	endif(MINGW)
 endif(WIN32)
-
 
 # Compile external dependencies
 find_package(OpenGL REQUIRED)
@@ -86,7 +82,6 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
-
 # libcommon.a
 add_library(common
 	common/shader.cpp
@@ -99,6 +94,10 @@ add_library(common
 	common/sprite.h
 	common/renderer.cpp
 	common/renderer.h
+	common/core.cpp
+	common/core.h
+	common/scene.cpp
+	common/scene.h
 )
 
 # Copy shaders to the build directory
@@ -107,10 +106,9 @@ file(
 	DESTINATION ${CMAKE_BINARY_DIR}
 )
 
-
 # game
 add_executable(game
-	game/demo.cpp
+	game/main.cpp
 )
 target_link_libraries(game
 	${ALL_LIBS}
@@ -121,7 +119,6 @@ file(
 	COPY ${CMAKE_SOURCE_DIR}/game/assets
 	DESTINATION ${CMAKE_BINARY_DIR}
 )
-
 
 if (NOT ${CMAKE_GENERATOR} MATCHES "Xcode" )
 #add_custom_command(

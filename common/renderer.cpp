@@ -53,9 +53,9 @@ int Renderer::init()
     glClearColor(0.5f, 0.0f, 0.4f, 0.0f);
 
     // Enable depth test
-    //glEnable(GL_DEPTH_TEST);
+    // glEnable(GL_DEPTH_TEST);
     // Accept fragment if it closer to the camera than the former one
-    //glDepthFunc(GL_LESS);
+    // glDepthFunc(GL_LESS);
 
     // Cull triangles which normal is not towards the camera
     glEnable(GL_CULL_FACE);
@@ -117,24 +117,24 @@ void Renderer::renderSprite(Sprite* sprite)
 	glEnableVertexAttribArray(vertexPosition_modelspaceID);
 	glBindBuffer(GL_ARRAY_BUFFER, sprite->vertexbuffer());
 	glVertexAttribPointer(
-		vertexPosition_modelspaceID,  // The attribute we want to configure
-		3,							// size : x+y+z => 3
-		GL_FLOAT,					 // type
-		GL_FALSE,					 // normalized?
-		0,							// stride
-		(void*)0					  // array buffer offset
+		vertexPosition_modelspaceID,	// The attribute we want to configure
+		3,								// size : x+y+z => 3
+		GL_FLOAT,						// type
+		GL_FALSE,						// normalized?
+		0,								// stride
+		(void*)0						// array buffer offset
 	);
 
 	// 2nd attribute buffer : UVs
 	glEnableVertexAttribArray(vertexUVID);
 	glBindBuffer(GL_ARRAY_BUFFER, sprite->uvbuffer());
 	glVertexAttribPointer(
-		vertexUVID,				   // The attribute we want to configure
-		2,							// size : U+V => 2
-		GL_FLOAT,					 // type
-		GL_FALSE,					 // normalized?
-		0,							// stride
-		(void*)0					  // array buffer offset
+		vertexUVID,						// The attribute we want to configure
+		2,								// size : U+V => 2
+		GL_FLOAT,						// type
+		GL_FALSE,						// normalized?
+		0,								// stride
+		(void*)0						// array buffer offset
 	);
 
 	// Draw the triangles !
