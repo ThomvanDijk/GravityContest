@@ -9,10 +9,10 @@
 // Include GLFW
 #include <glfw3.h>
 
+// Include core
 #include <common/core.h>
-#include <common/renderer.h>
-//#include <common/sprite.h>
 
+// Include superscene for all scenes
 #include "superscene.h"
 
 int main(void)
@@ -23,17 +23,10 @@ int main(void)
 	// Create here the scenes, in this case I create a superscene but that isn't allowed later.
 	SuperScene* superScene = new SuperScene();
 
-	//Renderer renderer;
-
 	// Do this until the ESC key is pressed or the window is closed
 	while (core.running)
 	{
-		//renderer.renderSprite(sprite);
-
-		// Swap buffers
-		//glfwSwapBuffers(renderer.window());
-		glfwPollEvents();
-
+		glfwPollEvents(); // this wil check for updates on input, window, etc.
 		core.update(superScene); // update and render the current scene
 	}
 

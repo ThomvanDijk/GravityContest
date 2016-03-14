@@ -18,6 +18,7 @@
 #include <glm/gtx/euler_angles.hpp>
 
 #include <common/texture.h>
+#include <common/point.h>
 
 class Sprite
 {
@@ -28,6 +29,8 @@ class Sprite
 		GLuint texture() { return _texture; };
 		GLuint vertexbuffer() { return _vertexbuffer; };
 		GLuint uvbuffer() { return _uvbuffer; };
+
+		Point* position;
 
 	private:
 		GLuint _texture;

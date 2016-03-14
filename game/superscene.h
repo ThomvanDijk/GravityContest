@@ -14,6 +14,7 @@ class SuperScene: public Scene
 
 	private:
 		Entity* entity;
+		Entity* entity2;
 
 };
 

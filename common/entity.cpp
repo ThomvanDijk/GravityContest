@@ -4,18 +4,19 @@ int Entity::_nextGuid = 0;
 
 Entity::Entity()
 {
+	position = new Point(0, 0);
+
 	_guid = _nextGuid;
 	_nextGuid++;
 
 	_parent = NULL;
-
 	_sprite = new Sprite();
-
 }
 
 Entity::~Entity()
 {
-
+	delete position;
+	delete _sprite;
 }
 
 void Entity::addChild(Entity* child)

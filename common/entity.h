@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <common/sprite.h>
+#include <common/point.h>
 
 class Entity
 {
@@ -21,6 +22,8 @@ class Entity
 
 		// sprite
 		Sprite* sprite() { return _sprite; };
+
+		Point* position;
 
 	private:
 		int _guid;

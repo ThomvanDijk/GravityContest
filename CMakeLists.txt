@@ -96,6 +96,8 @@ add_library(common
 	common/renderer.h
 	common/core.cpp
 	common/core.h
+	common/point.cpp
+	common/point.h
 	common/scene.cpp
 	common/scene.h
 	common/entity.cpp

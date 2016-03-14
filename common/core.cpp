@@ -27,5 +27,4 @@ void Core::update(Scene* scene)
 	if (glfwWindowShouldClose(_renderer.window()) != 0) {
 		running = false;
 	}
-
 }

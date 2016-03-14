@@ -130,6 +130,8 @@ glm::mat4 Renderer::getModelMatrix()
 
 void Renderer::renderSprite(Sprite* sprite)
 {
+	sprite->position;
+
 	// Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
 	computeMatricesFromInputs(_window);
 
