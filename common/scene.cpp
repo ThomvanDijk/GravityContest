@@ -12,10 +12,13 @@ Scene::~Scene()
 
 void Scene::updateScene()
 {
-	// update() all Children (recursively)
-	std::vector<Entity*> children = this->getChildren();
-	std::vector<Entity*>::iterator child;
-	for (child = children.begin(); child != children.end(); child++) {
-		this->updateScene();
+	int size = _childList.size();
+	for (int i = 0; i < size; i++) {
+		
 	}
+}
+
+void Scene::addChild(Entity* child)
+{
+	_childList.push_back(child);
 }

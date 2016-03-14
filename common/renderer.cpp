@@ -1,5 +1,7 @@
 #include <common/renderer.h>
 
+#include <iostream>
+
 Renderer::Renderer()
 {
     window_width = 800;
@@ -87,51 +89,19 @@ void Renderer::renderScene(Scene* scene)
 
 	// Set model matrix and render the entity with the sprites in it.
 	ModelMatrix = glm::mat4(1.0f);
-	this->renderEntity(scene);
+
+	int size = scene->getChildList().size();
+	for (int i = 0; i < size; i++) {
+		std::vector<Entity*> childList = scene->getChildList();
+		this->renderSprite(childList[i]->sprite());
+	}
 
 	// Swap buffers
 	glfwSwapBuffers(window());
 }
 
-void Renderer::renderEntity(Entity* entity)
-{
-	// multiply ModelMatrix for this child with the ModelMatrix of the parent (the caller of this method)
-	// the first time we do this (for the root-parent), modelMatrix is identity.
-	ModelMatrix *= this->getModelMatrix();
-
-	// Check for Sprites to see if we need to render anything
-	Sprite* sprite = entity->sprite();
-	if (sprite != NULL) {
-		this->renderSprite(sprite);
-	}
-
-	// Render all Children (recursively)
-	std::vector<Entity*> children = entity->getChildren();
-	std::vector<Entity*>::iterator child;
-	for (child = children.begin(); child != children.end(); child++) {
-		// Transform child's children...
-		this->renderEntity(entity);
-		// ...then reset modelMatrix for siblings to the modelMatrix of the parent.
-		ModelMatrix = this->getModelMatrix(); //(*child)->parent()
-	}
-}
-
-glm::mat4 Renderer::getModelMatrix()
-{
-	// Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(300.0f, 300.0f, 0.0f));
-	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, 0.0f);
-	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-
-	ModelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
-
-	return ModelMatrix;
-}
-
 void Renderer::renderSprite(Sprite* sprite)
 {
-	sprite->position;
-
 	// Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
 	computeMatricesFromInputs(_window);
 
@@ -144,7 +114,12 @@ void Renderer::renderSprite(Sprite* sprite)
 	// Use our shader
 	glUseProgram(programID);
 
-	ModelMatrix = getModelMatrix();
+	// Build the Model matrix
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(300.0f, 300.0f, 0.0f));
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, 0.0f);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+
+	ModelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
 	glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 

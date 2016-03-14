@@ -10,7 +10,9 @@ SuperScene::SuperScene() : Scene()
 	entity2 = new Entity();
 	
 	entity2->position = new Point(0, 0);
-	//addChild(entity);
+	
+	addChild(entity);
+	addChild(entity2);
 }
 
 SuperScene::~SuperScene() 

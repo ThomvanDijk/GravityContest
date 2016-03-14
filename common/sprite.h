@@ -30,8 +30,6 @@ class Sprite
 		GLuint vertexbuffer() { return _vertexbuffer; };
 		GLuint uvbuffer() { return _uvbuffer; };
 
-		Point* position;
-
 	private:
 		GLuint _texture;
 		GLuint _vertexbuffer;

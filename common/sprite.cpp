@@ -2,8 +2,6 @@
 
 Sprite::Sprite()
 {
-	position = new Point(0, 0);
-
     std::string texture_file = "assets/island.bmp";
 
     // Load the texture (see: texture.h/cpp)
