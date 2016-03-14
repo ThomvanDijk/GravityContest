@@ -6,10 +6,11 @@ SuperScene::SuperScene() : Scene()
 {
 	cout << "new scene created" << endl;
 	
-	sprite = new Sprite();
+	entity = new Entity();
+	//addChild(entity);
 }
 
 SuperScene::~SuperScene() 
 {
-	delete sprite;
+	
 }

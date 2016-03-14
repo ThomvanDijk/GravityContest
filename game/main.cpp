@@ -23,22 +23,19 @@ int main(void)
 	// Create here the scenes, in this case I create a superscene but that isn't allowed later.
 	SuperScene* superScene = new SuperScene();
 
-	Renderer renderer;
-	//Sprite* sprite = new Sprite();
+	//Renderer renderer;
 
 	// Do this until the ESC key is pressed or the window is closed
-	while (glfwGetKey(renderer.window(), GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(renderer.window()) == 0)
+	while (core.running)
 	{
 		//renderer.renderSprite(sprite);
 
 		// Swap buffers
-		glfwSwapBuffers(renderer.window());
+		//glfwSwapBuffers(renderer.window());
 		glfwPollEvents();
 
 		core.update(superScene); // update and render the current scene
-	} 
-
-	//delete sprite;
+	}
 
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();

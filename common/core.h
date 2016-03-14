@@ -12,6 +12,8 @@ class Core
 
 		void update(Scene* scene);
 
+		bool running;
+
 	private:
 		Renderer _renderer;
 };

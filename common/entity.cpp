@@ -8,6 +8,9 @@ Entity::Entity()
 	_nextGuid++;
 
 	_parent = NULL;
+
+	_sprite = new Sprite();
+
 }
 
 Entity::~Entity()
@@ -35,4 +38,12 @@ void Entity::removeChild(Entity* child)
 			++it;
 		}
 	}
+}
+
+Entity* Entity::getChild(unsigned int i)
+{
+	if (i < _children.size()) {
+		return _children[i];
+	}
+	return NULL;
 }

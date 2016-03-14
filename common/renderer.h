@@ -35,7 +35,7 @@ class Renderer
 
 	private:
 		int init();
-		
+
 		GLFWwindow* _window;
 		int window_width;
 		int window_height;
@@ -49,7 +49,11 @@ class Renderer
 		GLuint matrixID;
 		GLuint textureID;
 
+		glm::mat4 getModelMatrix();
+		glm::mat4 ModelMatrix;
 		glm::mat4 ProjectionMatrix;
+
+		void renderEntity(Entity* entity);
 };
 
 #endif /* RENDERER_H */

@@ -13,7 +13,7 @@ class SuperScene: public Scene
 		virtual ~SuperScene();
 
 	private:
-		Sprite* sprite;
+		Entity* entity;
 
 };
 

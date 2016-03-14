@@ -8,6 +8,8 @@ Renderer::Renderer()
     fragment_shader	= "shaders/sprite.frag";
     vertex_shader	= "shaders/sprite.vert";
 
+	//std::cout << "renderer created" << std::endl;
+
     this->init();
 }
 
@@ -32,7 +34,7 @@ int Renderer::init()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context
-    _window = glfwCreateWindow( window_width, window_height, "Demo", NULL, NULL);
+    _window = glfwCreateWindow(window_width, window_height, "Demo", NULL, NULL);
     if( _window == NULL ){
         fprintf( stderr, "Failed to open GLFW window.\n" );
         glfwTerminate();
@@ -82,6 +84,48 @@ void Renderer::renderScene(Scene* scene)
 {
 	// Clear the screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// Set model matrix and render the entity with the sprites in it.
+	ModelMatrix = glm::mat4(1.0f);
+	this->renderEntity(scene);
+
+	// Swap buffers
+	glfwSwapBuffers(window());
+}
+
+void Renderer::renderEntity(Entity* entity)
+{
+	// multiply ModelMatrix for this child with the ModelMatrix of the parent (the caller of this method)
+	// the first time we do this (for the root-parent), modelMatrix is identity.
+	ModelMatrix *= this->getModelMatrix();
+
+	// Check for Sprites to see if we need to render anything
+	Sprite* sprite = entity->sprite();
+	if (sprite != NULL) {
+		this->renderSprite(sprite);
+	}
+
+	// Render all Children (recursively)
+	std::vector<Entity*> children = entity->getChildren();
+	std::vector<Entity*>::iterator child;
+	for (child = children.begin(); child != children.end(); child++) {
+		// Transform child's children...
+		this->renderEntity(entity);
+		// ...then reset modelMatrix for siblings to the modelMatrix of the parent.
+		ModelMatrix = this->getModelMatrix(); //(*child)->parent()
+	}
+}
+
+glm::mat4 Renderer::getModelMatrix()
+{
+	// Build the Model matrix
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(300.0f, 300.0f, 0.0f));
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, 0.0f);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+
+	ModelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+
+	return ModelMatrix;
 }
 
 void Renderer::renderSprite(Sprite* sprite)
@@ -93,17 +137,12 @@ void Renderer::renderSprite(Sprite* sprite)
 	//printf("(%f,%f)\n",cursor.x, cursor.y);
 
 	glm::mat4 ViewMatrix = getViewMatrix(); // get from Camera (Camera position and direction)
-	glm::mat4 ModelMatrix = glm::mat4(1.0f);
+	ModelMatrix = glm::mat4(1.0f);
 
 	// Use our shader
 	glUseProgram(programID);
 
-	// Build the Model matrix
-	glm::mat4 translationMatrix	= glm::translate(glm::mat4(1.0f), glm::vec3(300.0f, 300.0f, 0.0f));
-	glm::mat4 rotationMatrix	= glm::eulerAngleYXZ(0.0f, 0.0f, 0.0f);
-	glm::mat4 scalingMatrix		= glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-
-	ModelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+	ModelMatrix = getModelMatrix();
 
 	glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
