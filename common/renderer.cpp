@@ -1,5 +1,4 @@
 #include <common/renderer.h>
-
 #include <iostream>
 
 Renderer::Renderer()
@@ -9,8 +8,6 @@ Renderer::Renderer()
 
     fragment_shader	= "shaders/sprite.frag";
     vertex_shader	= "shaders/sprite.vert";
-
-	//std::cout << "renderer created" << std::endl;
 
     this->init();
 }
@@ -49,6 +46,11 @@ int Renderer::init()
         fprintf(stderr, "Failed to initialize GLEW\n");
         return -1;
     }
+
+	// for drawing lines???
+	GLuint VertexArrayID;
+	glGenVertexArrays(1, &VertexArrayID);
+	glBindVertexArray(VertexArrayID);
 
     // Ensure we can capture the escape key being pressed below
     glfwSetInputMode(_window, GLFW_STICKY_KEYS, GL_TRUE);
@@ -91,13 +93,38 @@ void Renderer::renderScene(Scene* scene)
 	ModelMatrix = glm::mat4(1.0f);
 
 	int size = scene->getChildList().size();
+	std::vector<Entity*> childList = scene->getChildList();
+
 	for (int i = 0; i < size; i++) {
-		std::vector<Entity*> childList = scene->getChildList();
+		//childList[i]->position;
 		this->renderSprite(childList[i]->sprite());
+		this->renderLine(childList[i]->line());
+
+		//std::cout << childList[i]->position.x << std::endl;
 	}
 
 	// Swap buffers
 	glfwSwapBuffers(window());
+}
+
+void Renderer::renderLine(Line* line)
+{
+	// 1rst attribute buffer : vertices
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, line->vertexbuffer());
+
+	glVertexAttribPointer(
+		0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+		3,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		0,                  // stride
+		(void*)0            // array buffer offset
+	);
+	
+	// Draw the triangle !
+	glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
+	glDisableVertexAttribArray(0);
 }
 
 void Renderer::renderSprite(Sprite* sprite)

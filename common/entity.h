@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include <common/sprite.h>
+#include <common/line.h>
 #include <common/point.h>
 
 class Entity
@@ -11,10 +12,12 @@ class Entity
 		virtual ~Entity();
 
 		Sprite* sprite() { return _sprite; };
-		Point* position;
+		Line* line() { return _line; };
+		Point position;
 
 	private:
 		Sprite* _sprite;
+		Line* _line;
 
 };
 

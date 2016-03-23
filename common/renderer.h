@@ -19,6 +19,7 @@
 
 #include <common/shader.h>
 #include <common/sprite.h>
+#include <common/line.h>
 #include <common/texture.h>
 #include <common/camera.h>
 #include <common/scene.h>
@@ -30,7 +31,9 @@ class Renderer
 		virtual ~Renderer();
 
 		void renderScene(Scene* scene);
+		void renderLine(Line* line);
 		void renderSprite(Sprite* sprite);
+
 		GLFWwindow* window() { return _window; };
 
 	private:

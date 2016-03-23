@@ -98,6 +98,8 @@ add_library(common
 	common/core.h
 	common/point.cpp
 	common/point.h
+	common/line.cpp
+	common/line.h
 	common/scene.cpp
 	common/scene.h
 	common/entity.cpp
