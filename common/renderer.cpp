@@ -47,10 +47,12 @@ int Renderer::init()
         return -1;
     }
 
+
 	// for drawing lines???
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
+
 
     // Ensure we can capture the escape key being pressed below
     glfwSetInputMode(_window, GLFW_STICKY_KEYS, GL_TRUE);
@@ -97,7 +99,7 @@ void Renderer::renderScene(Scene* scene)
 
 	for (int i = 0; i < size; i++) {
 		//childList[i]->position;
-		this->renderSprite(childList[i]->sprite());
+		//this->renderSprite(childList[i]->sprite());
 		this->renderLine(childList[i]->line());
 
 		//std::cout << childList[i]->position.x << std::endl;

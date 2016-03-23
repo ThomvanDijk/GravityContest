@@ -2,10 +2,10 @@
 
 Sprite::Sprite()
 {
-    std::string texture_file = "assets/island.bmp";
+    //std::string texture_file = "assets/island.bmp";
 
     // Load the texture (see: texture.h/cpp)
-	_texture = loadBMP_custom(texture_file.c_str());
+	//_texture = loadBMP_custom(texture_file.c_str());
 	
 	int sprite_width = 50;
 	int sprite_height = 50;
