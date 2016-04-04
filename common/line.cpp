@@ -2,11 +2,18 @@
 
 Line::Line()
 {
-	// An array of 3 vectors which represents 3 vertices
+	int sprite_width = 50;
+	int sprite_height = 50;
+
+	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
+	// A sprite has 1 face (quad) with 2 triangles each, so this makes 1*2=2 triangles, and 2*3 vertices
 	GLfloat g_vertex_buffer_data[] = {
-		-1.0f, -1.0f, 0.0f,
-		 1.0f, -1.0f, 0.0f,
-		 0.0f,  1.0f, 0.0f,
+		 0.5f * sprite_width, -0.5f * sprite_height, 0.0f,
+		-0.5f * sprite_width, -0.5f * sprite_height, 0.0f,
+		-0.5f * sprite_width,  0.5f * sprite_height, 0.0f,
+		-0.5f * sprite_width,  0.5f * sprite_height, 0.0f,
+		 0.5f * sprite_width,  0.5f * sprite_height, 0.0f,
+		 0.5f * sprite_width, -0.5f * sprite_height, 0.0f
 	};
 
 	glGenBuffers(1, &_vertexbuffer);
@@ -16,5 +23,5 @@ Line::Line()
 
 Line::~Line()
 {
-    glDeleteBuffers(1, &_vertexbuffer);
+	glDeleteBuffers(1, &_vertexbuffer);
 }
