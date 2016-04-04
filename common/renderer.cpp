@@ -16,7 +16,6 @@ Renderer::~Renderer()
 {
     // Cleanup VBO and shader
 	glDeleteProgram(programID);
-	glDeleteTextures(1, &textureID);
 }
 
 int Renderer::init()
@@ -47,13 +46,6 @@ int Renderer::init()
         return -1;
     }
 
-
-	// Line??
-	/*gluint vertexarrayid;
-	glgenvertexarrays(1, &vertexarrayid);
-	glbindvertexarray(vertexarrayid);*/
-
-
     // Ensure we can capture the escape key being pressed below
     glfwSetInputMode(_window, GLFW_STICKY_KEYS, GL_TRUE);
 
@@ -78,8 +70,6 @@ int Renderer::init()
 
     // Get a handle for our "MVP" uniform
     matrixID = glGetUniformLocation(programID, "MVP");
-    // Get a handle for our "myTextureSampler" uniform
-    textureID  = glGetUniformLocation(programID, "myTextureSampler");
 
     ProjectionMatrix = glm::ortho(0.0f, (float)window_width, (float)window_height, 0.0f, 0.1f, 100.0f);
 
@@ -98,11 +88,7 @@ void Renderer::renderScene(Scene* scene)
 	std::vector<Entity*> childList = scene->getChildList();
 
 	for (int i = 0; i < size; i++) {
-		//childList[i]->position;
-		this->renderSprite(childList[i]->sprite());
-		//this->renderLine(childList[i]->line());
-
-		//std::cout << childList[i]->position.x << std::endl;
+		this->renderLine(childList[i]->line());
 	}
 
 	// Swap buffers
@@ -110,26 +96,6 @@ void Renderer::renderScene(Scene* scene)
 }
 
 void Renderer::renderLine(Line* line)
-{
-	// 1rst attribute buffer : vertices
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, line->vertexbuffer());
-
-	glVertexAttribPointer(
-		0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-		3,                  // size
-		GL_FLOAT,           // type
-		GL_FALSE,           // normalized?
-		0,                  // stride
-		(void*)0            // array buffer offset
-	);
-
-	// Draw the line!
-	glDrawArrays(GL_LINE_LOOP, 0, 3); // Starting from vertex 0; 2 vertices total -> 1 line
-	glDisableVertexAttribArray(0);
-}
-
-void Renderer::renderSprite(Sprite* sprite)
 {
 	// Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
 	computeMatricesFromInputs(_window);
@@ -158,7 +124,7 @@ void Renderer::renderSprite(Sprite* sprite)
 
 	// attribute buffer : vertices
 	glEnableVertexAttribArray(vertexPosition_modelspaceID);
-	glBindBuffer(GL_ARRAY_BUFFER, sprite->vertexbuffer());
+	glBindBuffer(GL_ARRAY_BUFFER, line->vertexbuffer());
 
 	glVertexAttribPointer(
 		vertexPosition_modelspaceID,	// The attribute we want to configure

@@ -18,7 +18,6 @@
 #include <glm/gtx/euler_angles.hpp>
 
 #include <common/shader.h>
-#include <common/sprite.h>
 #include <common/line.h>
 #include <common/texture.h>
 #include <common/camera.h>
@@ -32,7 +31,6 @@ class Renderer
 
 		void renderScene(Scene* scene);
 		void renderLine(Line* line);
-		void renderSprite(Sprite* sprite);
 
 		GLFWwindow* window() { return _window; };
 

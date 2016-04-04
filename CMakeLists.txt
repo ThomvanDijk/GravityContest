@@ -90,8 +90,6 @@ add_library(common
 	common/camera.h
 	common/texture.cpp
 	common/texture.h
-	common/sprite.cpp
-	common/sprite.h
 	common/renderer.cpp
 	common/renderer.h
 	common/core.cpp

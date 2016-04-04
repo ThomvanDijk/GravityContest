@@ -4,7 +4,6 @@
 #include <iostream>
 
 #include <common/scene.h>
-#include <common/sprite.h>
 
 class SuperScene: public Scene 
 {
