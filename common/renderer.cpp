@@ -6,8 +6,8 @@ Renderer::Renderer()
     window_width = 800;
     window_height = 600;
 
-    fragment_shader	= "shaders/sprite.frag";
-    vertex_shader	= "shaders/sprite.vert";
+    fragment_shader	= "shaders/line.frag";
+    vertex_shader	= "shaders/line.vert";
 
     this->init();
 }
@@ -52,11 +52,6 @@ int Renderer::init()
     // background color
     glClearColor(0.4f, 0.4f, 0.5f, 0.0f);
 
-    // Enable depth test
-    // glEnable(GL_DEPTH_TEST);
-    // Accept fragment if it closer to the camera than the former one
-    // glDepthFunc(GL_LESS);
-
     // Cull triangles which normal is not towards the camera
     glEnable(GL_CULL_FACE);
 
@@ -66,7 +61,9 @@ int Renderer::init()
 
     // Get a handle for our buffers
     vertexPosition_modelspaceID = glGetAttribLocation(programID, "vertexPosition_modelspace");
-    vertexUVID = glGetAttribLocation(programID, "vertexUV");
+
+	// Get a handle for our buffers
+	colorID = glGetUniformLocation(programID, "color");
 
     // Get a handle for our "MVP" uniform
     matrixID = glGetUniformLocation(programID, "MVP");
@@ -121,6 +118,9 @@ void Renderer::renderLine(Line* line)
 	// Send our transformation to the currently bound shader,
 	// in the "MVP" uniform
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
+
+	//glm::vec4 colortest = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	glUniform4f(colorID, 1.0f, 0.0f, 0.0f, 1.0f);
 
 	// attribute buffer : vertices
 	glEnableVertexAttribArray(vertexPosition_modelspaceID);

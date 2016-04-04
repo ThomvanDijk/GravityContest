@@ -27,9 +27,14 @@ class Line
 		virtual ~Line();
 
 		GLuint vertexbuffer() { return _vertexbuffer; };
+		GLuint colorbuffer() { return _colorbuffer; };
+
+		float scale;
 
 	private:
 		GLuint _vertexbuffer;
+		GLuint _colorbuffer;
+		
 };
 
 #endif /* LINE_H */

@@ -34,12 +34,14 @@ class Renderer
 
 		GLFWwindow* window() { return _window; };
 
+		int window_width;
+		int window_height;
+
 	private:
 		int init();
 
 		GLFWwindow* _window;
-		int window_width;
-		int window_height;
+		
 
 		std::string fragment_shader;
 		std::string vertex_shader;
@@ -47,6 +49,7 @@ class Renderer
 		GLuint programID;
 		GLuint vertexPosition_modelspaceID;
 		GLuint vertexUVID;
+		GLuint colorID;
 		GLuint matrixID;
 		GLuint textureID;
 

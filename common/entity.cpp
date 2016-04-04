@@ -8,6 +8,5 @@ Entity::Entity()
 
 Entity::~Entity()
 {
-	//delete position;
 	delete _line;
 }
