@@ -30,7 +30,7 @@ class Renderer
 		virtual ~Renderer();
 
 		void renderScene(Scene* scene);
-		void renderLine(Line* line);
+		void renderLine(glm::mat4& modelMatrix, Line* line);
 
 		GLFWwindow* window() { return _window; };
 
@@ -40,8 +40,12 @@ class Renderer
 	private:
 		int init();
 
+		/// @brief get the modelMatrix from an Entity
+		/// @param entity The Entity we need the modelMatrix from.
+		/// @return glm::mat4
+		inline glm::mat4 _getModelMatrix(Entity* entity);
+
 		GLFWwindow* _window;
-		
 
 		std::string fragment_shader;
 		std::string vertex_shader;
@@ -53,8 +57,8 @@ class Renderer
 		GLuint matrixID;
 		GLuint textureID;
 
-		glm::mat4 ModelMatrix;
-		glm::mat4 ProjectionMatrix;
+		glm::mat4 modelMatrix;
+		glm::mat4 projectionMatrix;
 
 };
 

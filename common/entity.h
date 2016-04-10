@@ -11,7 +11,11 @@ class Entity
 		virtual ~Entity();
 
 		Line* line() { return _line; };
-		Point position;
+
+		// transform
+		Point position; /**< @brief The position of the Entity */
+		float rotation; /**< @brief The rotation of the Entity */
+		Point scale; /**< @brief The scale of the Entity */
 
 	private:
 		Line* _line;

@@ -4,12 +4,9 @@ Line::Line()
 {
 	// Here the point where the lines are drawn between are defined
 	GLfloat g_vertex_buffer_data[] = {
-		 100.5f  , -0.5f  , 0.0f,
-		-0.5f  , -0.5f  , 0.0f,
-		-0.5f  ,  0.5f  , 0.0f,
-		-0.5f  ,  0.5f  , 0.0f,
-		 0.5f  ,  0.5f  , 0.0f,
-		 0.5f  , -0.5f  , 0.0f
+		 0.0f,   0.0f, 0.0f,
+		25.0f, -75.0f, 0.0f,
+		50.0f,   0.0f, 0.0f
 	};
 
 	glGenBuffers(1, &_vertexbuffer);

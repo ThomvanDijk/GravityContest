@@ -68,7 +68,7 @@ int Renderer::init()
     // Get a handle for our "MVP" uniform
     matrixID = glGetUniformLocation(programID, "MVP");
 
-    ProjectionMatrix = glm::ortho(0.0f, (float)window_width, (float)window_height, 0.0f, 0.1f, 100.0f);
+	projectionMatrix = glm::ortho(0.0f, (float)window_width, (float)window_height, 0.0f, 0.1f, 100.0f);
 
     return 0;
 }
@@ -79,20 +79,41 @@ void Renderer::renderScene(Scene* scene)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Set model matrix and render the entity with the sprites in it.
-	ModelMatrix = glm::mat4(1.0f);
+	modelMatrix = glm::mat4(1.0f);
 
 	int size = scene->getChildList().size();
 	std::vector<Entity*> childList = scene->getChildList();
 
 	for (int i = 0; i < size; i++) {
-		this->renderLine(childList[i]->line());
+		// multiply ModelMatrix for this child with the ModelMatrix of the parent (the caller of this method)
+		// the first time we do this (for the root-parent), modelMatrix is identity.
+		modelMatrix *= this->_getModelMatrix(childList[i]);
+
+		this->renderLine(modelMatrix, childList[i]->line());
 	}
 
 	// Swap buffers
 	glfwSwapBuffers(window());
 }
 
-void Renderer::renderLine(Line* line)
+glm::mat4 Renderer::_getModelMatrix(Entity* entity)
+{
+	// OpenGL doesn't understand our Vector2. Make it glm::vec3 compatible.
+	glm::vec3 position = glm::vec3(entity->position.x, entity->position.y, 0.0f);
+	glm::vec3 rotation = glm::vec3(0.0f, 0.0f, entity->rotation);
+	glm::vec3 scale = glm::vec3(entity->scale.x, entity->scale.y, 1.0f);
+
+	// Build the Model matrix
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), position);
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, rotation.z);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), scale);
+
+	glm::mat4 mm = translationMatrix * rotationMatrix * scalingMatrix;
+
+	return mm;
+}
+
+void Renderer::renderLine(glm::mat4& modelMatrix, Line* line)
 {
 	// Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
 	computeMatricesFromInputs(_window);
@@ -101,19 +122,19 @@ void Renderer::renderLine(Line* line)
 	//printf("(%f,%f)\n",cursor.x, cursor.y);
 
 	glm::mat4 ViewMatrix = getViewMatrix(); // get from Camera (Camera position and direction)
-	ModelMatrix = glm::mat4(1.0f);
+	modelMatrix = glm::mat4(1.0f);
 
 	// Use our shader
 	glUseProgram(programID);
 
 	// Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(300.0f, 300.0f, 0.0f));
+	glm::mat4 translationMatrix = glm::translate(modelMatrix, glm::vec3(300.0f, 300.0f, 0.0f));
 	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, 0.0f);
 	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
-	ModelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+	modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
-	glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
+	glm::mat4 MVP = projectionMatrix * ViewMatrix * modelMatrix;
 
 	// Send our transformation to the currently bound shader,
 	// in the "MVP" uniform

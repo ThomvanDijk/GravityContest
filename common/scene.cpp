@@ -14,7 +14,7 @@ void Scene::updateScene()
 {
 	int size = _childList.size();
 	for (int i = 0; i < size; i++) {
-		// hmm??
+		// nm
 	}
 }
 

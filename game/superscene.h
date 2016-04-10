@@ -11,6 +11,8 @@ class SuperScene: public Scene
 		SuperScene();
 		virtual ~SuperScene();
 
+		void SuperScene::update();
+
 	private:
 		Entity* entity;
 		Entity* entity2;
