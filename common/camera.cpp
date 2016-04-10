@@ -22,6 +22,7 @@ glm::vec3 getCursor(){
 }
 
 float speed = 300.0f; // 300 units / second
+bool cameraLocked = true; // camera locked
 
 
 void computeMatricesFromInputs(GLFWwindow* window)
@@ -42,21 +43,24 @@ void computeMatricesFromInputs(GLFWwindow* window)
 	glm::vec3 right = glm::vec3(1, 0, 0);
 	glm::vec3 up = glm::vec3(0, -1, 0);
 
-	// Move up
-	if (glfwGetKey( window, GLFW_KEY_UP ) == GLFW_PRESS){
-		position += up * deltaTime * speed;
-	}
-	// Move down
-	if (glfwGetKey( window, GLFW_KEY_DOWN ) == GLFW_PRESS){
-		position -= up * deltaTime * speed;
-	}
-	// Strafe right
-	if (glfwGetKey( window, GLFW_KEY_RIGHT ) == GLFW_PRESS){
-		position += right * deltaTime * speed;
-	}
-	// Strafe left
-	if (glfwGetKey( window, GLFW_KEY_LEFT ) == GLFW_PRESS){
-		position -= right * deltaTime * speed;
+	// if the camera is not locked move it
+	if (!cameraLocked) {
+		// Move up
+		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+			position += up * deltaTime * speed;
+		}
+		// Move down
+		if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+			position -= up * deltaTime * speed;
+		}
+		// Strafe right
+		if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+			position += right * deltaTime * speed;
+		}
+		// Strafe left
+		if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+			position -= right * deltaTime * speed;
+		}
 	}
 
 	// View matrix
