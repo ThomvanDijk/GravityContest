@@ -1,8 +1,8 @@
-#include "superscene.h"
+#include "gamescene.h"
 
 using namespace std;
 
-SuperScene::SuperScene() : Scene() 
+GameScene::GameScene() : Scene()
 {
 	cout << "new scene created" << endl;
 	
@@ -16,12 +16,12 @@ SuperScene::SuperScene() : Scene()
 	addChild(entity2);
 }
 
-SuperScene::~SuperScene() 
+GameScene::~GameScene()
 {
 	
 }
 
-void SuperScene::update(float deltaTime)
+void GameScene::update(float deltaTime)
 {
 	if (input()->getKey(GLFW_KEY_SPACE)) {
 		entity2->rotation += 0.1 * deltaTime;

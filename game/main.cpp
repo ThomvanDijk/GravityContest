@@ -13,7 +13,7 @@
 #include <common/core.h>
 
 // Include superscene for all scenes
-#include "superscene.h"
+#include "gamescene.h"
 
 int main(void)
 {
@@ -21,12 +21,12 @@ int main(void)
 	Core core;
 
 	// Create here the scenes, in this case I create a superscene but that isn't allowed later.
-	SuperScene* superScene = new SuperScene();
+	GameScene* gameScene = new GameScene();
 
 	// Do this until the ESC key is pressed or the window is closed
 	while (core.running)
 	{
-		core.update(superScene); // update and render the current scene
+		core.update(gameScene); // update and render the current scene
 	}
 
 	// Close OpenGL window and terminate GLFW

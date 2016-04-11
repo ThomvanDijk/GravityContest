@@ -115,8 +115,8 @@ file(
 # game
 add_executable(game
 	game/main.cpp
-	game/superscene.cpp
-	game/superscene.h
+	game/gamescene.cpp
+	game/gamescene.h
 	game/fighter.cpp
 	game/fighter.h
 )

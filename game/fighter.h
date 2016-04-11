@@ -1,22 +1,20 @@
-#ifndef SUPERSCENE_H
-#define SUPERSCENE_H
+#ifndef FIGHTER_H
+#define FIGHTER_H
 
 #include <iostream>
 
-#include <common/scene.h>
+#include <common/entity.h>
 
-class SuperScene: public Scene 
+class Fighter : public Entity
 {
 	public:
-		SuperScene();
-		virtual ~SuperScene();
+		Fighter();
+		virtual ~Fighter();
 
-		void SuperScene::update(float deltaTime);
+		void Fighter::update(float deltaTime);
 
 	private:
-		Entity* entity;
-		Entity* entity2;
-
+		
 };
 
-#endif /* SUPERSCENE_H */ 
+#endif /* FIGHTER_H */ 

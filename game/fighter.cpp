@@ -1,31 +1,19 @@
-#include "superscene.h"
+#include "fighter.h"
 
 using namespace std;
 
-SuperScene::SuperScene() : Scene() 
+Fighter::Fighter() : Entity()
 {
-	cout << "new scene created" << endl;
+	cout << "new fighter created" << endl;
 	
-	entity = new Entity();
-	entity2 = new Entity();
-	
-	entity->position = Point(400, 400);
-	entity2->position = Point(200, 200);
-	
-	addChild(entity);
-	addChild(entity2);
 }
 
-SuperScene::~SuperScene() 
+Fighter::~Fighter()
 {
 	
 }
 
-void SuperScene::update(float deltaTime)
+void Fighter::update(float deltaTime)
 {
-	if (input()->getKey(GLFW_KEY_SPACE)) {
-		entity2->rotation += 0.1 * deltaTime;
-	}
 	
-	entity->rotation -= 0.1 * deltaTime;
 }
