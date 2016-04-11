@@ -10,7 +10,7 @@ SuperScene::SuperScene() : Scene()
 	entity2 = new Entity();
 	
 	entity->position = Point(400, 400);
-	entity2->position = Point(40, 60);
+	entity2->position = Point(200, 200);
 	
 	addChild(entity);
 	addChild(entity2);
@@ -21,7 +21,8 @@ SuperScene::~SuperScene()
 	
 }
 
-void SuperScene::update()
+void SuperScene::update(float deltaTime)
 {
-	entity->rotation -= 0.01;
+	entity2->rotation += 0.1 * deltaTime;
+	entity->rotation -= 0.1 * deltaTime;
 }

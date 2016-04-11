@@ -11,7 +11,7 @@ class SuperScene: public Scene
 		SuperScene();
 		virtual ~SuperScene();
 
-		void SuperScene::update();
+		void SuperScene::update(float deltaTime);
 
 	private:
 		Entity* entity;

@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <common/entity.h>
+#include <common/input.h>
 
 class Scene: public Entity
 {
@@ -11,10 +12,13 @@ class Scene: public Entity
 		Scene();
 		virtual ~Scene();
 
-		void updateScene();
+		void updateScene(float deltaTime);
 
 		// the extending class must implement the update function
-		virtual void update() = 0;
+		virtual void update(float deltaTime) = 0;
+
+		// return input pointer
+		Input* input() { return _input; };
 
 		// child
 		void addChild(Entity* child);
@@ -22,6 +26,8 @@ class Scene: public Entity
 
 	private:
 		std::vector<Entity*> _childList;
+
+		Input* _input;
 };
 
 #endif /* SCENE_H */

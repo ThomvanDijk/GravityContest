@@ -26,7 +26,6 @@ int main(void)
 	// Do this until the ESC key is pressed or the window is closed
 	while (core.running)
 	{
-		glfwPollEvents(); // this wil check for updates on input, window, etc.
 		core.update(superScene); // update and render the current scene
 	}
 

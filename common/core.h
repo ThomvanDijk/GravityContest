@@ -15,7 +15,10 @@ class Core
 		bool running;
 
 	private:
+		double _calculateDeltaTime();
+
 		Renderer _renderer;
+		double _deltaTime;
 };
 
 #endif /* CORE_H */
