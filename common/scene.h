@@ -10,7 +10,11 @@ class Scene: public Entity
 	public:
 		Scene();
 		virtual ~Scene();
+
 		void updateScene();
+
+		// the extending class must implement the update function
+		virtual void update() = 0;
 
 		// child
 		void addChild(Entity* child);

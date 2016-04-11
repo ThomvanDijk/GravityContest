@@ -23,5 +23,5 @@ SuperScene::~SuperScene()
 
 void SuperScene::update()
 {
-
+	entity->rotation -= 0.01;
 }

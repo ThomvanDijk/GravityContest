@@ -50,7 +50,7 @@ int Renderer::init()
     glfwSetInputMode(_window, GLFW_STICKY_KEYS, GL_TRUE);
 
     // background color
-    glClearColor(0.4f, 0.4f, 0.5f, 0.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     // Cull triangles which normal is not towards the camera
     glEnable(GL_CULL_FACE);
@@ -121,11 +121,6 @@ void Renderer::renderEntity(Entity* entity)
 	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, rotation.z);
 	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), scale);
 
-	//// Build the Model matrix
-	//glm::mat4 translationMatrix = glm::translate(modelMatrix, glm::vec3(10.0f, 10.0f, 0.0f));
-	//glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, 0.0f);
-	//glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-
 	modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
 	glm::mat4 MVP = projectionMatrix * ViewMatrix * modelMatrix;
@@ -164,8 +159,6 @@ void Renderer::renderEntity(Entity* entity)
 
 void Renderer::renderLine(Line* line)
 {
-	
-
 	//glm::vec4 colortest = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	glUniform4f(colorID, 1.0f, 0.0f, 0.0f, 1.0f);
 
