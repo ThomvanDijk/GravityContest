@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include <common/scene.h>
+#include "fighter.h"
 
 class GameScene : public Scene
 {
@@ -16,6 +17,8 @@ class GameScene : public Scene
 	private:
 		Entity* entity;
 		Entity* entity2;
+
+		Fighter* fighter1;
 
 };
 

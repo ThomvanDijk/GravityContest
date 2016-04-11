@@ -15,5 +15,5 @@ Fighter::~Fighter()
 
 void Fighter::update(float deltaTime)
 {
-	
+
 }

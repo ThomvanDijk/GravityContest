@@ -5,15 +5,10 @@ using namespace std;
 GameScene::GameScene() : Scene()
 {
 	cout << "new scene created" << endl;
-	
-	entity = new Entity();
-	entity2 = new Entity();
-	
-	entity->position = Point(400, 400);
-	entity2->position = Point(200, 200);
-	
-	addChild(entity);
-	addChild(entity2);
+
+	fighter1 = new Fighter();
+	fighter1->position = Point(400, 500);
+	addChild(fighter1);
 }
 
 GameScene::~GameScene()
@@ -23,9 +18,15 @@ GameScene::~GameScene()
 
 void GameScene::update(float deltaTime)
 {
+	fighter1->update(deltaTime);
+
 	if (input()->getKey(GLFW_KEY_SPACE)) {
-		entity2->rotation += 0.1 * deltaTime;
+		fighter1->position.y -= 100 * deltaTime;
 	}
-	
-	entity->rotation -= 0.1 * deltaTime;
+	if (input()->getKey(GLFW_KEY_LEFT)) {
+		fighter1->rotation -= 1 * deltaTime;
+	}
+	if (input()->getKey(GLFW_KEY_RIGHT)) {
+		fighter1->rotation += 1 * deltaTime;
+	}
 }

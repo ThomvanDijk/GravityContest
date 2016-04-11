@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include <common/entity.h>
+#include <common/input.h>
 
 class Fighter : public Entity
 {
