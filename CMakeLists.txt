@@ -117,7 +117,10 @@ add_executable(game
 	game/main.cpp
 	game/superscene.cpp
 	game/superscene.h
+	game/fighter.cpp
+	game/fighter.h
 )
+
 target_link_libraries(game
 	${ALL_LIBS}
 )

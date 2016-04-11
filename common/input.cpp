@@ -41,7 +41,7 @@ void Input::_checkKey(int key)
 		if (_keys[key] == false) { // if first time pressed down
 			_keys[key] = true;
 			_keysDown[key] = true;
-			std::cout << "DOWN: " << key << std::endl;
+			//std::cout << "DOWN: " << key << std::endl;
 		}
 		else {
 			// not the first time this is pressed
@@ -54,9 +54,11 @@ void Input::_checkKey(int key)
 		if (_keys[key] == true) { // still pressed
 			_keys[key] = false;
 			_keysUp[key] = true;
-			std::cout << "UP: " << key << std::endl;
+			//std::cout << "UP: " << key << std::endl;
 		}
 		else {
+			// not the first time this is pressed
+			// keys[key] is still false;
 			_keysUp[key] = false;
 		}
 	}
