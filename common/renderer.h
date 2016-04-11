@@ -30,7 +30,8 @@ class Renderer
 		virtual ~Renderer();
 
 		void renderScene(Scene* scene);
-		void renderLine(glm::mat4& modelMatrix, Line* line);
+		void renderEntity(Entity* entity);
+		void renderLine(Line* line);
 
 		GLFWwindow* window() { return _window; };
 
@@ -43,7 +44,7 @@ class Renderer
 		/// @brief get the modelMatrix from an Entity
 		/// @param entity The Entity we need the modelMatrix from.
 		/// @return glm::mat4
-		inline glm::mat4 _getModelMatrix(Entity* entity);
+		//inline glm::mat4 _getModelMatrix(Entity* entity);
 
 		GLFWwindow* _window;
 

@@ -79,41 +79,25 @@ void Renderer::renderScene(Scene* scene)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Set model matrix and render the entity with the sprites in it.
-	modelMatrix = glm::mat4(1.0f);
+	//modelMatrix = glm::mat4(1.0f);
 
 	int size = scene->getChildList().size();
-	std::vector<Entity*> childList = scene->getChildList();
+	std::vector<Entity*> entityList = scene->getChildList();
 
+	// for each entity
 	for (int i = 0; i < size; i++) {
 		// multiply ModelMatrix for this child with the ModelMatrix of the parent (the caller of this method)
 		// the first time we do this (for the root-parent), modelMatrix is identity.
-		modelMatrix *= this->_getModelMatrix(childList[i]);
+		//modelMatrix *= this->_getModelMatrix(childList[i]);
 
-		this->renderLine(modelMatrix, childList[i]->line());
+		this->renderEntity(entityList[i]);
 	}
 
 	// Swap buffers
 	glfwSwapBuffers(window());
 }
 
-glm::mat4 Renderer::_getModelMatrix(Entity* entity)
-{
-	// OpenGL doesn't understand our Vector2. Make it glm::vec3 compatible.
-	glm::vec3 position = glm::vec3(entity->position.x, entity->position.y, 0.0f);
-	glm::vec3 rotation = glm::vec3(0.0f, 0.0f, entity->rotation);
-	glm::vec3 scale = glm::vec3(entity->scale.x, entity->scale.y, 1.0f);
-
-	// Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), position);
-	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, rotation.z);
-	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), scale);
-
-	glm::mat4 mm = translationMatrix * rotationMatrix * scalingMatrix;
-
-	return mm;
-}
-
-void Renderer::renderLine(glm::mat4& modelMatrix, Line* line)
+void Renderer::renderEntity(Entity* entity)
 {
 	// Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
 	computeMatricesFromInputs(_window);
@@ -127,10 +111,20 @@ void Renderer::renderLine(glm::mat4& modelMatrix, Line* line)
 	// Use our shader
 	glUseProgram(programID);
 
+	// use spritepos for position
+	glm::vec3 position = glm::vec3(entity->position.x, entity->position.y, 0.0f);
+	glm::vec3 rotation = glm::vec3(0.0f, 0.0f, entity->rotation);
+	glm::vec3 scale = glm::vec3(entity->scale.x, entity->scale.y, 0.0f);
+
 	// Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(modelMatrix, glm::vec3(300.0f, 300.0f, 0.0f));
-	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, 0.0f);
-	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+	glm::mat4 translationMatrix = glm::translate(modelMatrix, position);
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, rotation.z);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), scale);
+
+	//// Build the Model matrix
+	//glm::mat4 translationMatrix = glm::translate(modelMatrix, glm::vec3(10.0f, 10.0f, 0.0f));
+	//glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, 0.0f);
+	//glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
 	modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
@@ -139,6 +133,38 @@ void Renderer::renderLine(glm::mat4& modelMatrix, Line* line)
 	// Send our transformation to the currently bound shader,
 	// in the "MVP" uniform
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
+
+	//int size = entity->getChildList().size();
+	//std::vector<Line*> lineList = entity->getChildList();
+
+	//// for each line
+	//for (int i = 0; i < size; i++) {
+	//	this->renderLine(lineList[i]);
+	//}
+
+	this->renderLine(entity->line());
+}
+
+//glm::mat4 Renderer::_getModelMatrix(Entity* entity)
+//{
+//	// OpenGL doesn't understand our Vector2. Make it glm::vec3 compatible.
+//	glm::vec3 position = glm::vec3(entity->position.x, entity->position.y, 0.0f);
+//	glm::vec3 rotation = glm::vec3(0.0f, 0.0f, entity->rotation);
+//	glm::vec3 scale = glm::vec3(entity->scale.x, entity->scale.y, 1.0f);
+//
+//	// Build the Model matrix
+//	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), position);
+//	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, rotation.z);
+//	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), scale);
+//
+//	glm::mat4 mm = translationMatrix * rotationMatrix * scalingMatrix;
+//
+//	return mm;
+//}
+
+void Renderer::renderLine(Line* line)
+{
+	
 
 	//glm::vec4 colortest = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	glUniform4f(colorID, 1.0f, 0.0f, 0.0f, 1.0f);
