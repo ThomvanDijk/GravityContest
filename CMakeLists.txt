@@ -119,6 +119,14 @@ add_executable(game
 	game/gamescene.h
 	game/fighter.cpp
 	game/fighter.h
+	game/mainmenu.cpp
+	game/mainmenu.h
+	game/introscreen.cpp
+	game/introscreen.h
+	game/victoryscreen.cpp
+	game/victoryscreen.h
+	game/creditsscreen.cpp
+	game/creditsscreen.h
 )
 
 target_link_libraries(game
