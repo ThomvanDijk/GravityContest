@@ -10,6 +10,7 @@ class Vector2
 {
 	public:
 		Vector2(float xx, float yy);
+		Vector2() {};
 
 		Vector2 Vector2::setTo(float xx, float yy);
 		Vector2 Vector2::create(float begin, float end);
