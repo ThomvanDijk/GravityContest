@@ -5,6 +5,7 @@
 
 #include <common/entity.h>
 #include <common/input.h>
+#include <common/vector2.h>
 
 class Fighter : public Entity
 {
@@ -15,6 +16,7 @@ class Fighter : public Entity
 		void Fighter::update(float deltaTime);
 
 	private:
+		Vector2* location;
 		
 };
 

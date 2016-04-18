@@ -104,6 +104,8 @@ add_library(common
 	common/entity.h
 	common/input.cpp
 	common/input.h
+	common/vector2.cpp
+	common/vector2.h
 )
 
 # Copy shaders to the build directory
