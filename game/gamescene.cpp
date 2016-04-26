@@ -24,9 +24,9 @@ void GameScene::update(float deltaTime)
 		fighter1->accelerate = true;
 	}
 	if (input()->getKey(GLFW_KEY_LEFT)) {
-		fighter1->rotation -= 1 * deltaTime;
+		fighter1->rotateLeft();
 	}
 	if (input()->getKey(GLFW_KEY_RIGHT)) {
-		fighter1->rotation += 1 * deltaTime;
+		fighter1->rotateRight();
 	}
 }

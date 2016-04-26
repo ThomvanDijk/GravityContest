@@ -6,6 +6,8 @@ Fighter::Fighter() : Entity()
 {
 	cout << "new fighter created" << endl;
 
+	vector2 = new Vector2(); // instance from Vector2 class
+
 	location = Vector2(100, 200);
 	velocity = Vector2(0, 0);
 	acceleration = Vector2(0, 0);
@@ -22,18 +24,21 @@ Fighter::Fighter() : Entity()
 
 Fighter::~Fighter()
 {
-	
+	delete vector2;
 }
 
 void Fighter::update(float deltaTime)
 {
+	this->deltaTime = deltaTime;
+
 	acceleration.add(gravity);
 	if (accelerate) {
-		acceleration.add(force.fromAngle(rotation));
+		acceleration.add(force.fromAngle(vector2->rad2deg(angle)));
+		acceleration.multS(0.001);
 	}
 
 	velocity.add(acceleration);
-	//this->rotation = angle;
+	this->rotation = angle;
 	location.add(velocity);
 	acceleration.multS(0);
 
@@ -41,4 +46,14 @@ void Fighter::update(float deltaTime)
 	position.y = location.y;
 
 	accelerate = false;
+}
+
+void Fighter::rotateLeft()
+{
+	angle -= 2 * deltaTime;
+}
+
+void Fighter::rotateRight()
+{
+	angle += 2 * deltaTime;
 }
