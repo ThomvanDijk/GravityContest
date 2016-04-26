@@ -20,6 +20,8 @@ class Fighter : public Entity
 		bool accelerate;
 
 	private:
+		void Fighter::boundaries();
+
 		Vector2* vector2;
 
 		Vector2 location;
@@ -29,6 +31,7 @@ class Fighter : public Entity
 		Vector2 direction;
 		Vector2 force;
 		Vector2 gravity;
+		Vector2 friction;
 
 		float topspeed;
 		float angle;

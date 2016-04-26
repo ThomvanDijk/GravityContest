@@ -14,7 +14,8 @@ Fighter::Fighter() : Entity()
 	mouse = Vector2(0, 0);
 	direction = Vector2(0, 0);
 	force = Vector2(0, 0);
-	gravity = Vector2(0, 0);
+	gravity = Vector2(0, 0.0001);
+	friction = Vector2(0, 0);
 
 	topspeed = 0.0001f;
 	angle = 0.0f;
@@ -37,6 +38,20 @@ void Fighter::update(float deltaTime)
 		acceleration.multS(0.001);
 	}
 
+	float c = 0.1;
+	float speed = velocity.mag();
+
+	//cout << speed << endl;
+	float dragMagnitude = c * speed * speed;
+
+	Vector2 drag = velocity;
+	friction = velocity;
+	friction.multS(-1);
+	//friction.normalize();
+	friction.multS(dragMagnitude);
+
+	acceleration.add(friction);
+
 	velocity.add(acceleration);
 	this->rotation = angle;
 	location.add(velocity);
@@ -46,6 +61,15 @@ void Fighter::update(float deltaTime)
 	position.y = location.y;
 
 	accelerate = false;
+	boundaries();
+}
+
+void Fighter::boundaries()
+{
+	if (position.y >= 600) {
+		location.y = 600;
+		velocity.multS(0);
+	}
 }
 
 void Fighter::rotateLeft()
