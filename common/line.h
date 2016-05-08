@@ -17,13 +17,15 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/euler_angles.hpp>
 
+#include <vector>
+
 #include <common/texture.h>
 #include <common/point.h>
 
 class Line
 {
 	public:
-		Line();
+		Line(std::vector<Point*> pointArray);
 		virtual ~Line();
 
 		GLuint vertexbuffer() { return _vertexbuffer; };
@@ -33,6 +35,7 @@ class Line
 		GLuint _vertexbuffer;
 		GLuint _colorbuffer;
 		
+		//Point* pointArray[];
 };
 
 #endif /* LINE_H */

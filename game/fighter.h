@@ -32,10 +32,14 @@ class Fighter : public Entity
 		Vector2 force;
 		Vector2 gravity;
 		Vector2 friction;
+		Vector2 drag;
 
 		float topspeed;
 		float angle;
 		float deltaTime;
+		float dragMagnitude;
+		float constant;
+		float speed;
 		
 };
 
