@@ -22,6 +22,9 @@ class Fighter : public Entity
 	private:
 		void Fighter::boundaries();
 
+		Line* body;
+		Line* exhaust;
+
 		Vector2* vector2;
 
 		Vector2 location;

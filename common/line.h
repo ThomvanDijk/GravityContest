@@ -25,8 +25,14 @@
 class Line
 {
 	public:
-		Line(std::vector<Point*> pointArray);
+		Line();
 		virtual ~Line();
+
+		void Line::addPoint(Point point);
+		void Line::bindPoints();
+
+		std::vector<GLfloat> getVertexBuffer() { return _vertex_buffer_data; };
+		void Line::setVertexBuffer(int i, float f);
 
 		GLuint vertexbuffer() { return _vertexbuffer; };
 		GLuint colorbuffer() { return _colorbuffer; };
@@ -34,8 +40,9 @@ class Line
 	private:
 		GLuint _vertexbuffer;
 		GLuint _colorbuffer;
-		
-		//Point* pointArray[];
+
+		std::vector<GLfloat> _vertex_buffer_data;
+
 };
 
 #endif /* LINE_H */

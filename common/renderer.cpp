@@ -129,15 +129,14 @@ void Renderer::renderEntity(Entity* entity)
 	// in the "MVP" uniform
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
-	//int size = entity->getChildList().size();
-	//std::vector<Line*> lineList = entity->getChildList();
+	int size = entity->getLineList().size();
+	std::vector<Line*> lineList = entity->getLineList();
 
-	//// for each line
-	//for (int i = 0; i < size; i++) {
-	//	this->renderLine(lineList[i]);
-	//}
+	// for each line
+	for (int i = 0; i < size; i++) {
+		this->renderLine(lineList[i]);
+	}
 
-	this->renderLine(entity->line());
 }
 
 //glm::mat4 Renderer::_getModelMatrix(Entity* entity)
