@@ -158,8 +158,8 @@ void Renderer::renderEntity(Entity* entity)
 
 void Renderer::renderLine(Line* line)
 {
-	//glm::vec4 colortest = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-	glUniform4f(colorID, 1.0f, 0.0f, 0.0f, 1.0f);
+	glm::vec4 color = line->getColor();
+	glUniform4f(colorID, color.x, color.y, color.z, color.w); // the alfa channel is not working yet
 
 	// attribute buffer : vertices
 	glEnableVertexAttribArray(vertexPosition_modelspaceID);

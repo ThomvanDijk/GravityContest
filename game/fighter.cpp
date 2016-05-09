@@ -8,17 +8,21 @@ Fighter::Fighter() : Entity()
 
 	// spaceship body
 	body = new Line();
-	body->addPoint(Point(0, 10));
-	body->addPoint(Point(50, 0));
-	body->addPoint(Point(0, -10));
-	addLine(body);
-
+	body->addPoint(Point(-20, 10));
+	body->addPoint(Point(30, 0));
+	body->addPoint(Point(-20, -10));
+	body->setColor(1, 1, 1, 1); // for now the values range from 0 to 1
+	
 	// spaceship exhaust
 	exhaust = new Line();
-	exhaust->addPoint(Point(0, 10));
-	exhaust->addPoint(Point(-10, 0));
-	exhaust->addPoint(Point(0, -10));
+	exhaust->addPoint(Point(-20, 8));
+	exhaust->addPoint(Point(-25, 0));
+	exhaust->addPoint(Point(-20, -8));
+	exhaust->setColor(1, 0.5, 0, 1);
+
+	// the first added line is drawn first
 	addLine(exhaust);
+	addLine(body);
 
 	vector2 = new Vector2(); // instance from Vector2 class
 
@@ -52,13 +56,13 @@ void Fighter::update(float deltaTime)
 {
 	this->deltaTime = deltaTime;
 
-	exhaust->setVertexBuffer(3, -10);
+	exhaust->setVertexBuffer(3, -25);
 
 	if (accelerate) {
 		acceleration.add(force.fromAngle(vector2->rad2deg(angle)));
 		acceleration.multS(0.001);
 
-		exhaust->setVertexBuffer(3, -30);
+		exhaust->setVertexBuffer(3, -45);
 	}
 
 	// for the friction

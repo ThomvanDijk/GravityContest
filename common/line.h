@@ -30,9 +30,9 @@ class Line
 
 		void Line::addPoint(Point point);
 		void Line::bindPoints();
-
-		std::vector<GLfloat> getVertexBuffer() { return _vertex_buffer_data; };
 		void Line::setVertexBuffer(int i, float f);
+		void Line::setColor(float r, float g, float b, float a);
+		glm::vec4 Line::getColor() { return _color; };
 
 		GLuint vertexbuffer() { return _vertexbuffer; };
 		GLuint colorbuffer() { return _colorbuffer; };
@@ -40,6 +40,8 @@ class Line
 	private:
 		GLuint _vertexbuffer;
 		GLuint _colorbuffer;
+
+		glm::vec4 _color;
 
 		std::vector<GLfloat> _vertex_buffer_data;
 

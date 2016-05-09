@@ -2,12 +2,17 @@
 
 Line::Line()
 {
-	
+	_color = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 Line::~Line()
 {
 	glDeleteBuffers(1, &_vertexbuffer);
+}
+
+void Line::setColor(float r, float g, float b, float a)
+{
+	_color = glm::vec4(r, g, b, a);
 }
 
 void Line::setVertexBuffer(int i, float f) 
