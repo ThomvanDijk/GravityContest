@@ -21,6 +21,7 @@ class Fighter : public Entity
 
 	private:
 		void Fighter::boundaries();
+		void Fighter::exaustAnimation();
 
 		Line* body;
 		Line* exhaust;
@@ -37,12 +38,13 @@ class Fighter : public Entity
 		Vector2 friction;
 		Vector2 drag;
 
-		float topspeed;
 		float angle;
 		float deltaTime;
 		float dragMagnitude;
 		float constant;
 		float speed;
+		float exhaustLength;
+		float timer; 
 		
 };
 

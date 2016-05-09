@@ -16,7 +16,7 @@ Fighter::Fighter() : Entity()
 	// spaceship exhaust
 	exhaust = new Line();
 	exhaust->addPoint(Point(-20, 8));
-	exhaust->addPoint(Point(-25, 0));
+	exhaust->addPoint(Point(-20, 0));
 	exhaust->addPoint(Point(-20, -8));
 	exhaust->setColor(1, 0.5, 0, 1);
 
@@ -32,17 +32,19 @@ Fighter::Fighter() : Entity()
 	mouse = Vector2(0, 0);
 	direction = Vector2(0, 0);
 	force = Vector2(0, 0);
-	gravity = Vector2(0, 0.0001);
+	gravity = Vector2(0, 0.0005);
 	friction = Vector2(0, 0);
-	drag = Vector2();
-
-	topspeed = 0.0001f;
-	angle = M_PI + M_PI / 2; // 270 degrees
+	drag = Vector2(0, 0);
 
 	// for friction
 	constant = 0.05;
 	dragMagnitude = 0;
 	speed = 0;
+
+	exhaustLength = -20;
+	angle = M_PI + M_PI / 2; // 270 degrees
+	timer = 0;
+	deltaTime = 0;
 
 	accelerate = false;
 }
@@ -56,14 +58,18 @@ void Fighter::update(float deltaTime)
 {
 	this->deltaTime = deltaTime;
 
-	exhaust->setVertexBuffer(3, -25);
+	if (exhaustLength < -20) {
+		exhaustLength += 200 * deltaTime;
+	}
 
 	if (accelerate) {
 		acceleration.add(force.fromAngle(vector2->rad2deg(angle)));
-		acceleration.multS(0.001);
-
-		exhaust->setVertexBuffer(3, -45);
+		acceleration.multS(0.0007);
+		exaustAnimation();
 	}
+
+	// set the length of the exhaust
+	exhaust->setVertexBuffer(3, exhaustLength);
 
 	// for the friction
 	speed = velocity.mag();
@@ -83,13 +89,28 @@ void Fighter::update(float deltaTime)
 	location.add(velocity);
 	acceleration.multS(0);
 
-	std::cout << speed << endl;
+	//std::cout << randNum << endl;
 
 	position.x = location.x;
 	position.y = location.y;
 
 	accelerate = false;
 	boundaries();
+}
+
+void Fighter::exaustAnimation()
+{
+	timer += 30 * deltaTime;
+
+	if (timer >= 0 && timer <= 1) {
+		exhaustLength = -60;
+	}
+	if (timer > 1 && timer <= 2) {
+		exhaustLength = -54;
+	}
+	if (timer > 2) {
+		timer = 0;
+	}
 }
 
 void Fighter::boundaries()
