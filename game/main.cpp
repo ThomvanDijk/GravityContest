@@ -12,7 +12,11 @@
 // Include core
 #include <common/core.h>
 
-// Include superscene for all scenes
+// include scene
+#include "scene.h"
+
+// include all scenes
+#include "mainmenu.h"
 #include "gamescene.h"
 
 int main(void)
@@ -20,13 +24,16 @@ int main(void)
 	// instantiate core
 	Core core;
 
-	// Create here the scenes, in this case I create a superscene but that isn't allowed later.
-	GameScene* gameScene = new GameScene();
+	// create here the scenes
+	std::vector<Scene*> scenes;
+
+	scenes.push_back(new MainMenu());
+	scenes.push_back(new GameScene());
 
 	// Do this until the ESC key is pressed or the window is closed
 	while (core.running)
 	{
-		core.update(gameScene); // update and render the current scene
+		core.update(scenes[0]); // update and render the current scene
 	}
 
 	// Close OpenGL window and terminate GLFW
