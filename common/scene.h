@@ -24,10 +24,15 @@ class Scene: public Entity
 		void addChild(Entity* child);
 		std::vector<Entity*> getChildList() { return _childList; };
 
+		void setActiveScene(int s) { _activeScene = s; }
+		int getActiveScene() { return _activeScene; }
+
 	private:
 		std::vector<Entity*> _childList;
 
 		Input* _input;
+
+		int _activeScene;
 };
 
 #endif /* SCENE_H */

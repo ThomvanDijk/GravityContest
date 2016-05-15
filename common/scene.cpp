@@ -2,6 +2,8 @@
 
 Scene::Scene() : Entity()
 {
+	_activeScene = 0;
+
 	// scene has an input
 	_input = new Input();
 }

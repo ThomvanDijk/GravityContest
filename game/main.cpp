@@ -30,10 +30,13 @@ int main(void)
 	scenes.push_back(new MainMenu());
 	scenes.push_back(new GameScene());
 
+	// instantiate scene
+	Scene* scene = scenes[0];
+
 	// Do this until the ESC key is pressed or the window is closed
 	while (core.running)
 	{
-		core.update(scenes[0]); // update and render the current scene
+		core.update(scenes[scene->getActiveScene()]); // update and render the current scene
 	}
 
 	// Close OpenGL window and terminate GLFW
