@@ -15,6 +15,6 @@ Entity::~Entity()
 
 void Entity::addLine(Line* line)
 {
+	// Lines are added so the renderer knows what to render.
 	lineList.push_back(line);
 }
-

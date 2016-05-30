@@ -106,6 +106,14 @@ add_library(common
 	common/input.h
 	common/vector2.cpp
 	common/vector2.h
+	common/text.cpp
+	common/text.h
+)
+
+# Copy fonts to the build directory
+file(
+	COPY ${CMAKE_SOURCE_DIR}/common/fonts
+	DESTINATION ${CMAKE_BINARY_DIR}
 )
 
 # Copy shaders to the build directory

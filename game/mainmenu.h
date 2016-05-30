@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include <common/scene.h>
+#include <common/text.h>
 
 class MainMenu : public Scene
 {
@@ -14,6 +15,7 @@ class MainMenu : public Scene
 		void MainMenu::update(float deltaTime);
 
 	private:
+		Text* titleText;
 
 };
 

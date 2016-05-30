@@ -37,6 +37,8 @@ class Line
 		GLuint vertexbuffer() { return _vertexbuffer; };
 		GLuint colorbuffer() { return _colorbuffer; };
 
+		bool loadLineFile(const std::string& filename);
+
 	private:
 		GLuint _vertexbuffer;
 		GLuint _colorbuffer;
