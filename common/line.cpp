@@ -67,10 +67,6 @@ bool Line::loadLineFile(const std::string& filename)
 				printf("File can't be read by the parser. Not 3 vertices per point.\n");
 				return false;
 			}
-
-			printf("works\n");
-			//_points.push_back(vertex);
-
 			addPoint(Point(vertex.x, vertex.y));
 		}
 		else {

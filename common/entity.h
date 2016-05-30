@@ -4,6 +4,8 @@
 #include <common/line.h>
 #include <common/point.h>
 
+#include <iostream>
+
 class Entity
 {
 	public:
