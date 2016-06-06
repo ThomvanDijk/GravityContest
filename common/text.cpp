@@ -2,10 +2,7 @@
 
 Text::Text() : Entity()
 {
-	_character = new Line();
-	_character->loadLineFile("fonts/a.line");
-	_character->setColor(1,1,0,1);
-	addLine(_character);
+	
 }
 
 Text::Text(const std::string& text) : Entity()
@@ -13,23 +10,21 @@ Text::Text(const std::string& text) : Entity()
 	for (int i = 0; i < text.size(); i++) {
 		_character = new Line();
 
-		char buf[100];
-		sprintf(buf, "/path/to/%c.ext", text[i]);
-		std::cout << buf << std::endl;
-		/*
-		// the location of the character
-		std::string location = "fonts/"; // folder
-		location.append(&text[i]); // character
-		location.append(".line"); // extension
+		// holds the path to the char
+		char buf[40];
 
-		std::cout << location << std::endl;
+		// changes %c to text[i] and puts the whole path in buf
+		sprintf(buf, "fonts/%c.line", text[i]);
 
-		// if the location is correctly loaded
-		if (_character->loadLineFile(location)) {
+		// if the location is correctly and can be loaded
+		if (_character->loadLineFile(buf)) {
 			_character->setColor(1, 1, 0, 1);
+			for (int i = 0; i < _character->getNumberOfPoints(); i++) {
+				_character->setVertexBuffer(i, 35);
+			}
+			
 			addLine(_character);
 		}
-		*/
 	}
 }
 

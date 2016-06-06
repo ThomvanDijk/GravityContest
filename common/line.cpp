@@ -4,6 +4,7 @@ Line::Line()
 {
 	// default color is white
 	_color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	_numberOfPoints = 0;
 }
 
 Line::~Line()
@@ -29,6 +30,9 @@ void Line::addPoint(Point point)
 	_vertex_buffer_data.push_back(point.x);
 	_vertex_buffer_data.push_back(point.y);
 	_vertex_buffer_data.push_back(0.0f);
+
+	// save the number of points added
+	_numberOfPoints++;
 
 	bindPoints();
 }

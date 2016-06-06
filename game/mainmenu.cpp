@@ -4,7 +4,7 @@ using namespace std;
 
 MainMenu::MainMenu() : Scene()
 {
-	titleText = new Text("HelLloO WoARld");
+	titleText = new Text("ab");
 	titleText->position = Point(400, 100);
 	
 	addChild(titleText);

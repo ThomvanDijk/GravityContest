@@ -37,11 +37,15 @@ class Line
 		GLuint vertexbuffer() { return _vertexbuffer; };
 		GLuint colorbuffer() { return _colorbuffer; };
 
+		int getNumberOfPoints() { return _numberOfPoints; };
+
 		bool loadLineFile(const std::string& filename);
 
 	private:
 		GLuint _vertexbuffer;
 		GLuint _colorbuffer;
+
+		int _numberOfPoints;
 
 		glm::vec4 _color;
 

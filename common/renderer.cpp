@@ -175,6 +175,6 @@ void Renderer::renderLine(Line* line)
 	);
 
 	// Draw the line!
-	glDrawArrays(GL_LINE_LOOP, 0, 74); // Starting from vertex 0; 2 vertices total -> 1 line
+	glDrawArrays(GL_LINE_LOOP, 0, line->getNumberOfPoints()); // Starting from vertex 0; 2 vertices total -> 1 line
 	glDisableVertexAttribArray(vertexPosition_modelspaceID);
 }
