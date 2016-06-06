@@ -2,6 +2,7 @@
 #define TEXT_H
 
 #include <common/entity.h>
+#include <common/char.h>
 
 class Text : public Entity
 {
@@ -11,7 +12,7 @@ class Text : public Entity
 		virtual ~Text();
 
 	private:
-		Line* _character;
+		Char* _newCharacter;
 
 };
 

@@ -17,9 +17,10 @@ void Line::setColor(float r, float g, float b, float a)
 	_color = glm::vec4(r, g, b, a);
 }
 
-void Line::setVertexBuffer(int i, float f) 
+void Line::setVertexBuffer(int i, float x, float y) 
 { 
-	_vertex_buffer_data[i] = f;
+	_vertex_buffer_data[i * 3] = x;
+	_vertex_buffer_data[i * 3 + 1] = y;
 
 	bindPoints();
 }

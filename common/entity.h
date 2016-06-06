@@ -12,8 +12,11 @@ class Entity
 		Entity();
 		virtual ~Entity();
 
-		std::vector<Line*> getLineList() { return lineList; };
+		std::vector<Line*> getLineList() { return _lineList; };
 		void Entity::addLine(Line* line);
+
+		void addChild(Entity* child);
+		void Entity::removeChild(Entity* child);
 
 		// transform
 		Point position; /**< @brief The position of the Entity */
@@ -21,7 +24,13 @@ class Entity
 		Point scale; /**< @brief The scale of the Entity */
 
 	private:
-		std::vector<Line*> lineList;
+		int _guid;
+		static int _nextGuid;
+
+		std::vector<Line*> _lineList;
+
+		Entity* _parent;
+		std::vector<Entity*> _children;
 
 };
 

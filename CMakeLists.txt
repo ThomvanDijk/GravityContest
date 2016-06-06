@@ -108,6 +108,8 @@ add_library(common
 	common/vector2.h
 	common/text.cpp
 	common/text.h
+	common/char.cpp
+	common/char.h
 )
 
 # Copy fonts to the build directory

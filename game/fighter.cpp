@@ -69,7 +69,7 @@ void Fighter::update(float deltaTime)
 	}
 
 	// set the length of the exhaust
-	exhaust->setVertexBuffer(3, exhaustLength);
+	exhaust->setVertexBuffer(1, exhaustLength, 0);
 
 	// for the friction
 	speed = velocity.mag();
