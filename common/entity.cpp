@@ -12,6 +12,8 @@ Entity::Entity()
 	position = Point(0.0f, 0.0f);
 	rotation = 0.0f;
 	scale = Point(1.0f, 1.0f);
+
+	_worldpos = Point(0.0f, 0.0f);
 }
 
 Entity::~Entity()
@@ -45,4 +47,12 @@ void Entity::removeChild(Entity* child)
 			++it;
 		}
 	}
+}
+
+Entity* Entity::getChild(unsigned int i)
+{
+	if (i < _children.size()) {
+		return _children[i];
+	}
+	return NULL;
 }

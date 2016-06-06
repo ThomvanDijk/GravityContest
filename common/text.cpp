@@ -16,7 +16,8 @@ Text::Text(const std::string& text) : Entity()
 
 		// creata a new char
 		_newCharacter = new Char(buf);
-		//_newCharacter->position.x += i * 10;
+		addChild(_newCharacter);
+		_newCharacter->position.x += i * 40;
 	}
 }
 

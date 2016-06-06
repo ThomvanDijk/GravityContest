@@ -17,11 +17,21 @@ class Entity
 
 		void addChild(Entity* child);
 		void Entity::removeChild(Entity* child);
+		Entity* Entity::getChild(unsigned int i);
+
+		const std::vector<Entity*>& children() { return _children; };
+
+		Entity* parent() { return _parent; };
 
 		// transform
 		Point position; /**< @brief The position of the Entity */
 		float rotation; /**< @brief The rotation of the Entity */
 		Point scale; /**< @brief The scale of the Entity */
+
+		void setWorldpos(Point wp) { _worldpos = wp; };
+
+	protected:
+		Point _worldpos;
 
 	private:
 		int _guid;
