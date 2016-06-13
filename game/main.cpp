@@ -39,6 +39,11 @@ int main(void)
 		core.update(scenes[scene->getActiveScene()]); // update and render the current scene
 	}
 
+	// delete the scenes
+	for (int i = 0; i < scenes.size(); i++) {
+		delete scenes[i];
+	}
+
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
 

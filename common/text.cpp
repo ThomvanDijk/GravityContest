@@ -17,8 +17,8 @@ Text::Text(const std::string& text) : Entity()
 		sprintf(path, "fonts/%c.line", text[i]);
 
 		// creata a new char if it isn't a space
-		if (text[i] != '32') {
-			_newCharacter = new Char(path);
+		if (text[i] != 32) {
+			Char* _newCharacter = new Char(path);
 			addChild(_newCharacter);
 			// add spacing between chars
 			_newCharacter->position.x += i * spacing;
@@ -28,5 +28,5 @@ Text::Text(const std::string& text) : Entity()
 
 Text::~Text()
 {
-	
+	std::cout << "destructor text" << std::endl;
 }

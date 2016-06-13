@@ -14,7 +14,7 @@ class Text : public Entity
 		float spacing;
 
 	private:
-		Char* _newCharacter;
+		//Char* _newCharacter;
 
 };
 

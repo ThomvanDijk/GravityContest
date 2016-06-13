@@ -28,11 +28,6 @@ class Entity
 		float rotation; /**< @brief The rotation of the Entity */
 		Point scale; /**< @brief The scale of the Entity */
 
-		void setWorldpos(Point wp) { _worldpos = wp; };
-
-	protected:
-		Point _worldpos;
-
 	private:
 		int _guid;
 		static int _nextGuid;

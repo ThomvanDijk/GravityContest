@@ -12,13 +12,16 @@ Entity::Entity()
 	position = Point(0.0f, 0.0f);
 	rotation = 0.0f;
 	scale = Point(1.0f, 1.0f);
-
-	_worldpos = Point(0.0f, 0.0f);
 }
 
 Entity::~Entity()
 {
+	std::cout << "destructor entity" << std::endl;
 
+	// delete all childeren
+	for (int i = 0; i < _children.size(); i++) {
+		delete _children[i];
+	}
 }
 
 void Entity::addLine(Line* line)

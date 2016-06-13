@@ -5,7 +5,7 @@ using namespace std;
 MainMenu::MainMenu() : Scene()
 {
 	//titleText = new Text("abcdefghijklmnopqrstuvwxyz");
-	titleText = new Text("A A");
+	titleText = new Text("space is big");
 	titleText->position = Point(40, 100);
 	
 	addChild(titleText);
@@ -13,7 +13,7 @@ MainMenu::MainMenu() : Scene()
 
 MainMenu::~MainMenu()
 {
-	
+	delete titleText;
 }
 
 void MainMenu::update(float deltaTime)
