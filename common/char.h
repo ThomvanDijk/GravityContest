@@ -7,7 +7,8 @@ class Char : public Entity
 {
 	public:
 		Char(const std::string& character);
-		virtual ~Char();
+		Char(const std::string& character, float r, float g, float b);
+		Char(const std::string& character, float r, float g, float b, float a);
 
 };
 

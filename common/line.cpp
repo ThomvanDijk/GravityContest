@@ -12,8 +12,24 @@ Line::~Line()
 	glDeleteBuffers(1, &_vertexbuffer);
 }
 
+void Line::setColor(float r, float g, float b)
+{
+	r /= 255; // convert to a value between 0 and 1
+	g /= 255;
+	b /= 255;
+
+	_color.r = r;
+	_color.g = g;
+	_color.b = b;
+}
+
 void Line::setColor(float r, float g, float b, float a)
 {
+	r /= 255; // convert to a value between 0 and 1
+	g /= 255;
+	b /= 255;
+	a /= 255;
+
 	_color = glm::vec4(r, g, b, a);
 }
 

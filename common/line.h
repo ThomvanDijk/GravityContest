@@ -32,6 +32,7 @@ class Line
 		void Line::bindPoints();
 		void Line::setVertexBuffer(int i, float x, float y);
 
+		void Line::setColor(float r, float g, float b);
 		void Line::setColor(float r, float g, float b, float a);
 		glm::vec4 Line::getColor() { return _color; };
 

@@ -7,7 +7,7 @@ Text::Text() : Entity()
 
 Text::Text(const std::string& text) : Entity()
 {
-	spacing = 40;
+	_spacing = 40;
 
 	for (int i = 0; i < text.size(); i++) {
 		// holds the path to the character
@@ -18,10 +18,11 @@ Text::Text(const std::string& text) : Entity()
 
 		// creata a new char if it isn't a space
 		if (text[i] != 32) {
-			Char* _newCharacter = new Char(path);
+			Char* _newCharacter = new Char(path, 255, 64, 10);
 			addChild(_newCharacter);
+
 			// add spacing between chars
-			_newCharacter->position.x += i * spacing;
+			_newCharacter->position.x += i * _spacing;
 		}
 	}
 }

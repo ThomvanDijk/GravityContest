@@ -10,7 +10,11 @@ class Text : public Entity
 		Text();
 		Text(const std::string& text);
 
-		float spacing;
+		float getSpacing() { return _spacing; }
+		void setSpacing(float f) { _spacing = f; }
+
+	private:
+		float _spacing;
 
 };
 
