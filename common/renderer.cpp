@@ -3,8 +3,11 @@
 
 Renderer::Renderer()
 {
-    window_width = 1100;
-    window_height = 600;
+	// standard window size
+	_window_width = 800;
+    _window_height = 600;
+
+	_fullscreen = true;
 
     fragment_shader	= "shaders/line.frag";
     vertex_shader	= "shaders/line.vert";
@@ -31,13 +34,30 @@ int Renderer::init()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
+	GLFWmonitor* primary = glfwGetPrimaryMonitor();
+
+	// the video mode also returns width and height
+	GLFWvidmode* mode = (GLFWvidmode*)glfwGetVideoMode(glfwGetPrimaryMonitor());
+
     // Open a window and create its OpenGL context
-    _window = glfwCreateWindow(window_width, window_height, "Demo", NULL, NULL);
-    if( _window == NULL ){
+	// if fullscreen use the screens dimensions
+	if (_fullscreen) {
+		_window = glfwCreateWindow(mode->width, mode->height, "Gravity Fighters", primary, NULL);
+
+		// change the default width and height for the rest of the renderer
+		_window_width = mode->width;
+		_window_height = mode->height;
+	}
+	else {
+		_window = glfwCreateWindow(_window_width, _window_height, "Gravity Fighters", NULL, NULL);
+	}
+
+    if (_window == NULL) {
         fprintf( stderr, "Failed to open GLFW window.\n" );
         glfwTerminate();
         return -1;
     }
+
     glfwMakeContextCurrent(_window);
 
     // Initialize GLEW
@@ -50,7 +70,7 @@ int Renderer::init()
     glfwSetInputMode(_window, GLFW_STICKY_KEYS, GL_TRUE);
 
     // background color
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearColor(0.0f, 0.5f, 0.0f, 0.0f);
 
     // Cull triangles which normal is not towards the camera
     glEnable(GL_CULL_FACE);
@@ -68,7 +88,7 @@ int Renderer::init()
     // Get a handle for our "MVP" uniform
     matrixID = glGetUniformLocation(programID, "MVP");
 
-	projectionMatrix = glm::ortho(0.0f, (float)window_width, (float)window_height, 0.0f, 0.1f, 100.0f);
+	projectionMatrix = glm::ortho(0.0f, (float)_window_width, (float)_window_height, 0.0f, 0.1f, 100.0f);
 
     return 0;
 }

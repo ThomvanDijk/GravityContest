@@ -4,7 +4,7 @@
 // Include standard headers
 #include <stdio.h>
 #include <stdlib.h>
-#include <string>
+#include <string>                       
 
 // Include GLEW
 #include <GL/glew.h>
@@ -35,11 +35,13 @@ class Renderer
 
 		GLFWwindow* window() { return _window; };
 
-		int window_width;
-		int window_height;
-
 	private:
 		int init();
+
+		int _window_width;
+		int _window_height;
+
+		bool _fullscreen;
 
 		inline glm::mat4 _getModelMatrix(Entity* entity);
 

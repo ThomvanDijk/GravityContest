@@ -18,7 +18,7 @@ Text::Text(const std::string& text) : Entity()
 
 		// creata a new char if it isn't a space
 		if (text[i] != 32) {
-			Char* _newCharacter = new Char(path, 255, 64, 10);
+			Char* _newCharacter = new Char(path, 0, 255, 255);
 			addChild(_newCharacter);
 
 			// add spacing between chars
