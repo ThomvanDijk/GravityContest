@@ -9,12 +9,8 @@ class Text : public Entity
 	public:
 		Text();
 		Text(const std::string& text);
-		virtual ~Text();
 
 		float spacing;
-
-	private:
-		//Char* _newCharacter;
 
 };
 

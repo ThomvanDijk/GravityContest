@@ -9,9 +9,6 @@ class Char : public Entity
 		Char(const std::string& character);
 		virtual ~Char();
 
-	private:
-		Line* _character;
-
 };
 
 #endif /* CHAR_H */

@@ -2,7 +2,7 @@
 
 Char::Char(const std::string& pathToChar) : Entity()
 {
-	_character = new Line();
+	Line* _character = new Line();
 
 	// if the location is correctly and can be loaded
 	if (_character->loadLineFile(pathToChar)) {
@@ -15,5 +15,5 @@ Char::Char(const std::string& pathToChar) : Entity()
 
 Char::~Char()
 {
-	delete _character;
+
 }

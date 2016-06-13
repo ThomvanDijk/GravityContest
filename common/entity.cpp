@@ -22,6 +22,14 @@ Entity::~Entity()
 	for (int i = 0; i < _children.size(); i++) {
 		delete _children[i];
 	}
+
+	// delete all lines
+	for (int i = 0; i < _lineList.size(); i++) {
+		delete _lineList[i];
+	}
+
+	_children.clear();
+	_lineList.clear();
 }
 
 void Entity::addLine(Line* line)

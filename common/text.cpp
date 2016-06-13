@@ -25,8 +25,3 @@ Text::Text(const std::string& text) : Entity()
 		}
 	}
 }
-
-Text::~Text()
-{
-	std::cout << "destructor text" << std::endl;
-}
