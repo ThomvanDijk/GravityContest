@@ -3,7 +3,7 @@
 
 Renderer::Renderer()
 {
-    window_width = 800;
+    window_width = 1100;
     window_height = 600;
 
     fragment_shader	= "shaders/line.frag";

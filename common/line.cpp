@@ -50,7 +50,7 @@ void Line::bindPoints()
 
 bool Line::loadLineFile(const std::string& filename)
 {
-	FILE * file = fopen(filename.c_str(), "r");
+	FILE* file = fopen(filename.c_str(), "r");
 	if (file == NULL) {
 		printf("Can't open %s\n", filename.c_str());
 		return false;
@@ -64,7 +64,7 @@ bool Line::loadLineFile(const std::string& filename)
 			break; // EOF = End Of File. Quit the loop.
 		}
 
-		// else : parse lineHeader
+		// else: parse lineHeader
 		if (strcmp(lineHeader, "v") == 0) {
 			glm::vec3 vertex;
 			int matches = fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
@@ -85,10 +85,5 @@ bool Line::loadLineFile(const std::string& filename)
 	}
 
 	fclose(file);
-
-	// close the line, maybe not necessary
-	//_points.push_back(_points[0]);
-	//addPoint(Point(-85.1355, 24.9158));
-
 	return true;
 }

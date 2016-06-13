@@ -11,6 +11,8 @@ class Text : public Entity
 		Text(const std::string& text);
 		virtual ~Text();
 
+		float spacing;
+
 	private:
 		Char* _newCharacter;
 
