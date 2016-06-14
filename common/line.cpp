@@ -9,7 +9,13 @@ Line::Line()
 
 Line::~Line()
 {
-	glDeleteBuffers(1, &_vertexbuffer);
+	glDeleteBuffers(1, &_vertexBuffer);
+
+	/*for (int i = 0; i < _vertexList.size(); i++) {
+		delete &_vertexList[i];
+	}
+
+	_vertexList.clear();*/
 }
 
 void Line::setColor(float r, float g, float b)
@@ -35,8 +41,8 @@ void Line::setColor(float r, float g, float b, float a)
 
 void Line::setVertexBuffer(int i, float x, float y) 
 { 
-	_vertex_buffer_data[i * 3] = x;
-	_vertex_buffer_data[i * 3 + 1] = y;
+	_vertexList[i * 3] = x;
+	_vertexList[i * 3 + 1] = y;
 
 	bindPoints();
 }
@@ -44,9 +50,9 @@ void Line::setVertexBuffer(int i, float x, float y)
 void Line::addPoint(Point point)
 {
 	// Here the points are defined where the lines are drawn between.
-	_vertex_buffer_data.push_back(point.x);
-	_vertex_buffer_data.push_back(point.y);
-	_vertex_buffer_data.push_back(0.0f);
+	_vertexList.push_back(point.x);
+	_vertexList.push_back(point.y);
+	_vertexList.push_back(0.0f);
 
 	// save the number of points added
 	_numberOfPoints++;
@@ -57,11 +63,11 @@ void Line::addPoint(Point point)
 void Line::bindPoints()
 {
 	// first delete the old buffer
-	glDeleteBuffers(1, &_vertexbuffer);
+	glDeleteBuffers(1, &_vertexBuffer);
 
-	glGenBuffers(1, &_vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, _vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, _vertex_buffer_data.size() * sizeof(GLfloat), &_vertex_buffer_data[0], GL_STATIC_DRAW);
+	glGenBuffers(1, &_vertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, _vertexList.size() * sizeof(GLfloat), &_vertexList[0], GL_STATIC_DRAW);
 }
 
 bool Line::loadLineFile(const std::string& filename)

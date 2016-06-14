@@ -18,6 +18,7 @@
 #include <glm/gtx/euler_angles.hpp>
 
 #include <vector>
+#include <iostream>
 
 #include <common/texture.h>
 #include <common/point.h>
@@ -36,22 +37,20 @@ class Line
 		void Line::setColor(float r, float g, float b, float a);
 		glm::vec4 Line::getColor() { return _color; };
 
-		GLuint vertexbuffer() { return _vertexbuffer; };
-		GLuint colorbuffer() { return _colorbuffer; };
+		GLuint vertexbuffer() { return _vertexBuffer; };
 
 		int getNumberOfPoints() { return _numberOfPoints; };
 
 		bool loadLineFile(const std::string& filename);
 
 	private:
-		GLuint _vertexbuffer;
-		GLuint _colorbuffer;
+		GLuint _vertexBuffer;
 
 		int _numberOfPoints;
 
 		glm::vec4 _color;
 
-		std::vector<GLfloat> _vertex_buffer_data;
+		std::vector<GLfloat> _vertexList;
 
 };
 

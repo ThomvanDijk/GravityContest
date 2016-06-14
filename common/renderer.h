@@ -33,6 +33,9 @@ class Renderer
 		void renderEntity(glm::mat4& modelMatrix, Entity* entity);
 		void renderLine(Line* line);
 
+		int getWindowWidth() { return _window_width; }
+		int getWindowHeight() { return _window_height; }
+
 		GLFWwindow* window() { return _window; };
 
 	private:

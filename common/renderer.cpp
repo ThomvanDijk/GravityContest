@@ -70,7 +70,7 @@ int Renderer::init()
     glfwSetInputMode(_window, GLFW_STICKY_KEYS, GL_TRUE);
 
     // background color
-    glClearColor(0.0f, 0.5f, 0.0f, 0.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     // Cull triangles which normal is not towards the camera
     glEnable(GL_CULL_FACE);

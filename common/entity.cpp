@@ -16,8 +16,6 @@ Entity::Entity()
 
 Entity::~Entity()
 {
-	std::cout << "destructor entity" << std::endl;
-
 	// delete all childeren
 	for (int i = 0; i < _children.size(); i++) {
 		delete _children[i];

@@ -21,8 +21,8 @@ Text::Text(const std::string& text) : Entity()
 			Char* _newCharacter = new Char(path, 0, 255, 255);
 			addChild(_newCharacter);
 
-			// add spacing between chars
-			_newCharacter->position.x += i * _spacing;
+			// add spacing between chars, also from middle
+			_newCharacter->position.x += (i * _spacing);// - ((text.size() * _spacing)/2);
 		}
 	}
 }

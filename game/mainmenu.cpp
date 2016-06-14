@@ -6,7 +6,7 @@ MainMenu::MainMenu() : Scene()
 {
 	//titleText = new Text("abcdefghijklmnopqrstuvwxyz");
 	titleText = new Text("Gravity Fighters");
-	titleText->position = Point(40, 100);
+	titleText->position = Point(50, 100);
 	
 	addChild(titleText);
 }

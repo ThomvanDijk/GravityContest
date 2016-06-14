@@ -11,14 +11,14 @@ Fighter::Fighter() : Entity()
 	body->addPoint(Point(-20, 10));
 	body->addPoint(Point(30, 0));
 	body->addPoint(Point(-20, -10));
-	body->setColor(1, 1, 1, 1); // for now the values range from 0 to 1
+	body->setColor(255, 255, 255); // for now the values range from 0 to 1
 	
 	// spaceship exhaust
 	exhaust = new Line();
 	exhaust->addPoint(Point(-20, 8));
 	exhaust->addPoint(Point(-20, 0));
 	exhaust->addPoint(Point(-20, -8));
-	exhaust->setColor(1, 0.5, 0, 1);
+	exhaust->setColor(185, 128, 0);
 
 	// the first added line is drawn first
 	addLine(exhaust);
@@ -51,6 +51,8 @@ Fighter::Fighter() : Entity()
 
 Fighter::~Fighter()
 {
+	delete exhaust;
+	delete body;
 	delete vector2;
 }
 
