@@ -2,6 +2,8 @@
 
 Line::Line()
 {
+	_vertexBuffer = 0;
+
 	// default color is white
 	_color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	_numberOfPoints = 0;
@@ -10,12 +12,6 @@ Line::Line()
 Line::~Line()
 {
 	glDeleteBuffers(1, &_vertexBuffer);
-
-	/*for (int i = 0; i < _vertexList.size(); i++) {
-		delete &_vertexList[i];
-	}
-
-	_vertexList.clear();*/
 }
 
 void Line::setColor(float r, float g, float b)
